@@ -1,0 +1,30 @@
+MYSQL commands
+
+After the installation is done
+mysql -u "username" -p  (to log in as that user, and prompt for the password)
+
+In mysql end every command with ";". Also in most documentation, the commands are written all capital, however this is not a must.
+
+Databases and tables
+- show databases;  (to show existing databases)
+- use "dbname";  (to switch to that database)
+- select database();  (to know which one is active)
+- create database "dbname";  (to create the dbname database)
+- show tables;  (to see tables in the active db)
+- describe "tablename"  (to see the table data structure, doesnt show records!)
+- select * from "tablename"  (to see all records in all fields)
+
+- create table "pet" (name varchar(20)m, owner varchar(20), sex char(1), birth date);  (to create the table "pet" with that structure, birt only accepts date format) 
+- load data local infile '/path/to/file' into table "tablename";  (the file's records needs to be separated with tab, and need to follow the structure of the table)
+(\N for entering null into a field, this only works, when loaded from a file)
+- insert into "pet" values ('stuffy', ... NULL);  (to insert data manually, use null for missing info)
+
+
+Users
+- select user, host from mysql.user;  (to show all existing users and their host information)
+- show grants for 'username'@'host'  (to see "username"'s rights)
+
+- create user 'Feri'@'localhost' identified by 'password for Feri'  (to create a user and specify its password)
+- grant all privileges on *.*  (to grant admin privileges to it)
+- drop user 'Feri'@'localhost';  (to erase that user)
+
