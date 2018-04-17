@@ -1,0 +1,36 @@
+git
+
+git config
+git config --list  (to see git config settings)
+
+
+git init  (in the folder, to start git)
+
+git status (to see the status of the files)
+git status -s  (for a shorter report)
+
+git diff  (to see what you have changed but not yet staged)
+git diff --staged  (to see what you have staged, and goes into next commit)
+
+git add "filename"/"directory name"  (To start tracking a new file, or files in a whole library)
+
+git rm "filename"  (to remove files from tracking, and hard drive)
+git rm --cached "filename"  (to remove file from staging area)
+
+git mv "filename" "filename.xyz"  (to rename, move a file
+
+git commit (to commit changes)
+git commit -m "comment"
+
+git log  (to see what you have committed so far)
+git log -p -2  (to see patch, difference in each commit, only last -2 entries in this case)
+git log --stat  (to see summary of changes)
+git log --pretty=oneline/short/full/fuller  (other options for viewing)
+git log --pretty=format:"%h - %an, %ar : %s"  (custom format for output)
+git log --pretty=format:"%h %s" --graph  (useful for visualizing branches)
+git log --since=2.weeks  (for limiting output)
+git log -S function_name  (to look for string, and commits that changed the number of occurences of -S)
+
+
+git clone https://github.com/libgit2/libgit2  (to clone an existing Repository)
+git clone https://github.com/libgit2/libgit2 mylibgit  (defining a new target dir for the git clone)
