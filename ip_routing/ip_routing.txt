@@ -1,0 +1,43 @@
+IP routing - Basics
+
+Static ip routing
+ip route show  (to see current ip routing table)
+route -n  (is the same, legacy method)
+
+To add a new route manually
+route add -net "ip" netmask "ip" gw "ip" dev "device"
+ip route add "ip/nm" via "ip" dev "devicename"
+
+To delete a route
+ip route delete "ip/nm"
+
+
+Dynamic ip routing
+The server effectively becomes a switch (For testing, use a server machine and a client, steps are in order)
+
+quagga  package is needed, based on  zebra
+/etc/quagga/daemons  file needs to be edited
+	 zebra=1
+	 ripd=1
+- Create  zebra.conf
+	service quagga restart
+	hostname "hostname"
+	password quagga
+- Create  ripd.conf
+	with same content as  zebra.conf
+
+chown quagga.quaggavty *.conf 
+chmod 640 *.conf
+- Restart quagga service
+
+Testing with telnet
+- telnet localhost 2601
+- Enter password when prompted
+enable → configure terminal →  inter "devicename" →  ip address "ip/nm" → exit → write → quit → quit
+
+- telnet localhost 2602
+enable → configure terminal → router rip → version 2 → network "ip/nm" → exit → write → exit → exit 
+
+- ip route show
+On the client
+- ip route add default via "server ip"
