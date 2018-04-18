@@ -20,7 +20,7 @@ quagga  package is needed, based on  zebra
 	 zebra=1
 	 ripd=1
 - Create  zebra.conf
-	service quagga restart
+	service quagga (or zebra) restart
 	hostname "hostname"
 	password quagga
 - Create  ripd.conf
