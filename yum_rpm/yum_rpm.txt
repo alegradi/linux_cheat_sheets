@@ -1,0 +1,44 @@
+CentOS package handling with yum, rpm
+
+yum
+
+yum update  (to update package info, and sys)
+yum list "package"  (get list of packages with "package" name)
+yum search "package"  (to search for a package)
+yum install "package"  (to install package)
+yum info "packagename"  (to get info on packagename)
+yum remove "packagename"  (to remove package)
+
+yum-utils package is needed for some of the following commands
+
+yumdownloader "packagename"  (to download only a package)
+yum list | grep "package"  (to grep in all packages)
+yum list installed | grep "package"  (to grep in installed packages)
+yum grouplist  (to install whole group of packages like LAMP, Desktop...)
+	yum groupinstall 'Security Tools'  (for example)
+
+yum repolist  (to see repository information)
+yum repolist all  (to see all available repositories, and which one is enabled)
+yum --enablerepo="id" install "package"  (to enable repo by "id" and install a package)
+
+yum clean all  (to do cleanup)
+yum history  (to see history of yum usage)
+
+
+rpm
+
+rpm -qpR "package"  (to see dependencies of a package)
+rpm -ivh "package"  (to install, verbose, hash)
+rpm -Uvh "package"  (to update package if already installed, more flexible, than previous)
+
+rpm -q "package"  (to see if package is installed)
+rpm -ql "package"  (to show all the files installed in a package)
+rpm -qa  (to show all installed packages)
+rpm -qa --last  (latest packages installed, at the top of list)
+
+rpm -evv  (debug info on packages to be erased?)
+rpm -qdf /usr/bin/vmstat  (what files to look into for documentation)
+rpm -Va  (to verify installed packages)
+
+rpm -qa gpg-pubkey*  (to show gpgs)
+rpm --rebuilddb  (to rebuild the rpm database)
