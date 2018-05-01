@@ -1,0 +1,64 @@
+Users and groups - 3rd edition
+
+User related commands
+For creating users there's two main commands, 
+	- useradd  (good for scripting) and  adduser  (ubuntu) 
+- adduser "user"  (will start an interactive mode, asking questions, ubuntu way)
+
+-useradd -m -s /bin/bash/ “user”  (is typical usage, after which you still have to use)
+	- passwd “user”
+	- mkdir /home/”user”
+	- cp -rT /etc/skel /home/”user” 
+
+- useradd -D  (to see the defaults for creating a user with useradd)
+- useradd "user"
+- useradd -d /home/employee/jano -m -s /bin/bash jano  (with different home dir., 	/home/employee must exist before running the command!)
+- useradd -m -e 2018-03-21  (to set expiry date)
+
+- userdel -r “username”  (r is suggested to clean eveything that belongs to a user)
+
+For aging options of the password and the account, and other interactive configs:
+- chage "username"  (puts you in an interactive mode)
+- chfn “username” (to change full name, interactive mode)
+- chsh “username” (to change default shell, interactive mode)
+- passwd “username”  (to set/change the password)
+
+- /etc/passwd  (contains the user information, if need to edit use  vipw)
+-/etc/shadow  (contains the password related info)
+- pwck  (to verify integrity of the passwd and shadow files)
+
+Usermod
+
+- usermod -aG "groupname" "username"  (to append groups to an existing user)
+- usermod -G “groupname,groupname” “username”  (to remove the user from groups not listed)
+- usermod -L "username"  (to lock a user)
+- usermod -U "username"  (to unlock a user)
+- usermod -e 2018-03-27 “username”  (to change expiry date)
+
+Groups
+- id "username"  (shows what groups a user belongs to and their id)
+- groups “username”  (to show the groups a user belongs to)
+- groupadd "groupname"  (to add a group)
+
+- groupdel "groupname"
+- groupmod "groupname"
+
+gpasswd  - use it to set and remove password for a group, restrict access, add users to group, set admins for group
+- gpasswd “groupname”  (to set a password on a group, after which you can change to it (it becomes your default group))
+
+- nwgroup “groupname”  (you need the password for that group)
+
+- /etc/group  (contains the information about groups, can manually add user to a group)
+- grpck  (to verify integrity of the gshadow gpasswd files)
+
+
+Changing defaults for users and groups
+- useradd -D  (to see default settings, for users)
+
+- /etc/default/useradd  (will contain this information)
+- /etc/login.defs  (contains password aging options)
+- /etc/skel/  (contains the files that are copied to every new user created)
+
+Resource access restriction 
+- /etc/security/limits.conf  (to limit resources)
+
