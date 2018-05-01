@@ -1,0 +1,86 @@
+Networking -2nd 
+
+The following is a collection of networking related commands (some with options) and configurations.
+
+1, Important configuration files are found at 
+	- /etc/network/interfaces  to set the behaviour of interfaces
+		auto enp4s0  (automatically raise the interface)
+		iface enp4s0 inet dhcp  (dynamic host resolution for the internet)
+		
+		auto enp3s0
+		iface enp3s0 inet static  (for a static configuration)
+		address 192.168.0.12
+		netmask 255.255.255.0
+		gateway 192.168.0.1
+		
+		- To control manually the interfaces you can use  
+			- ifup "devicename" 
+			- ifdown "devicename"
+
+	- /etc/hostname  that contains the machines hostname
+		- This needs to match /proc/sys/kernel/hostname
+	
+	- /etc/hosts  that contains hostname information regarding this machine or 	others
+	
+	- /etc/resolv.conf  automatically generated, shows the order of resolving DNS
+		- Can prepend its contents with  /etc/dhcp/dhclient.conf
+
+2, To apply runtime configuration, use
+	- ip help
+	- ip address add dev enp4s0 192.168.0.17/16  (for example for adding a 	secondary ip)
+	
+3, General troubleshooting for networking
+	Layer		Tool
+	1 Physical	ip, ethtool, link light
+	2 Datalink	arp, tcpdump
+	3 Network	ping, traceroute
+	4 Transport	netstat, netcat, tcpdump
+	5 OS		logs
+
+ip
+	- ip help
+	- ip address
+	- ip route 
+
+ethtool
+	- ethtool enp4s0  (for example, gives very detailed report)
+
+ARP
+	- arp -a  to see the ARP cache
+
+tcpdump
+	- tcpdump -D  to show available interfaces to capture on
+	- tcpdump -ni # (or) "devicename"  name resolution turned off, device
+	
+	Its good practice to filter on the captured traffic (eating less resources)
+	- tcpdump -n -i "interface" "filter-expressions"		
+	- tcpdump -n -i 1 arp
+	- tcpdump -n -i 1 host google.com
+	- tcpdump -n -i 1 ip "ip"
+	- tcpdump -n -i 1 tcp port 822 
+	
+	To capture to a file	
+	- tcpdump -i 1 -w "filename".pcap (traditionally) -v (to see if it works)
+	- tcpdump -r "filename"  to read a capture file
+
+traceroute 
+to trace connections accross the network
+	- traceroute "hostname"
+
+netstat 
+to see what is listening on what port
+	- netstat -tulpen
+		- tcp
+		- udp
+		- listening
+		- port
+		- extended
+		- no resolution
+	- netstat -peanut
+
+netcat 
+to generate traffic
+	 	
+route
+route -n  (to display the routing table)
+
