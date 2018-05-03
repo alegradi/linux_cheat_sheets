@@ -1,0 +1,35 @@
+iptables - basics
+
+iptables might have a clonflict with network-manager so make sure its removed.
+
+Basic iptables commands
+- iptables -L  (to see current rules)
+- iptables -L -v --line-numbers  (for numbered rules)
+
+- iptables --flush  (to erase previous rules)
+
+- iptables -P FORWARD/INPUT/OUTPUT DROP/REJECT/ACCEPT  (to set defaults)
+	- on Internet facing devices use DROP 
+	- on local network facing devices use REJECT (as it gives a REJECT answer back)
+
+- iptables-save > "file"
+- iptables-restore < "file"
+
+Loopback
+- iptables -A INPUT -i lo -j ACCEPT
+- iptables -A OUTPUT -o lo -j ACCEPT
+
+SSH on port 22 (for incoming)
+- iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+- iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+SSH on port 22 (for initating ssh)
+- iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
+- iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+
+Advanced uses
+
+- iptables -A INPUT --protocol icmp --in-interface enp0s3 -j DROP
+
+

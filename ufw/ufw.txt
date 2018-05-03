@@ -1,0 +1,44 @@
+ufw
+
+1, Basic config file at:
+	- /etc/default/ufw
+
+2, To see ufw status use:
+	- ufw status
+	- ufw status verbose  with showing defaults
+
+3, To set defaults use:
+	- ufw default deny incoming (for example)
+	- ufw default allow outgoing 
+
+4, To set general rules by port or service:
+	- ufw allow 80 = ufw allow http (both tcp and udp)
+		- Services defined in  /etc/services
+	- ufw allow 6000:6007/tcp  (ports 6000 to 6007 on tcp)
+	
+5, To set rules by specific ips:
+	- ufw deny from "ip" 
+	- ufw allow from "ip" to any  (to any ports)
+	- ufw allow from "ip" to 22
+	
+6, To work with different subnets:
+	- ufw allow out on eth0 to 10.0.0.0/8  
+	
+7, To limit connections:
+	- ufw limit ssh/tcp  (typical usage against brute force)
+
+8, To specify devices (network interfaces), - DIRECTION (in/out) on INTERFACE
+	- ufw allow in on eth0 to any port 80 proto tcp 
+		- Allow all incoming http connections on eth0
+
+9, To delete a rule, you can specify by rule number or full syntax
+	- ufw status numbered  to see rule number
+		- ufw delete #
+	- ufw delete allow in on eth2 to 20.20.20.0/8 port 441 
+
+10, To add a comment when adding a rule just add the following to the syntax:
+	- comment 'your comment' 
+
+11, To reset ufw to zero settings:
+	- ufw reset
+
