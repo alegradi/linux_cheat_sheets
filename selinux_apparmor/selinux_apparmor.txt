@@ -1,0 +1,43 @@
+SELinux and AppArmor
+
+SELinux – Mainly used on RHEL 
+1, SELinux can be only enabled or disabled (needs reboot when changed)
+	- getenforce  to get info
+
+2, If SELinux is enabled it can be in
+	- enforcing mode, use  setenforce enforcing (or permissive)
+	- permissive mode (for troubleshooting)
+
+3, Config files can be at
+	- /etc/sysconfig/selinux
+	- /etc/selinux/config
+
+4, SELinux labels, can be seen in many commands with -Z
+	- ls -lZ  to see it on files
+	- ps Zaux  to see it on processes
+	- netstat -Ztulpen  to see it with network connections
+
+5, To change context (labels for different items) for files and services
+	- man semanage-fcontext
+	- semanage fcontext -a -t "type" ""folder""  and always needs to be followed by
+	- restorecon -R -v "folder"
+	- to change if for ports for example
+		- semanage port -a -t ssh_port_t -p tcp "portnumber"
+
+6, To see booleans  getsebool -a
+	- use it like  getsebool -a | grep "ftp"
+	- setsebool "boolean" on (or off)
+	- setsebool -P "boolean" off  is a persistant solution
+
+AppArmor 
+Profile files are stored at  /etc/apparmor.d
+
+apparmor_status  (to get report on apparmor)
+
+aa-enforce /path/to/file  (to place a process in enforce mode)
+aa-complain /path/to/file  (to place a process in complain mode)
+aa-complain /etc/apparmor.d/*  (to place all services in complain mode)
+sudo ln -s /etc/apparmor.d/profile.name /etc/apparmor.d/disable/  (to disable a profile)
+
+To get more profiles, need to install  apparmor-profiles  package, you might need apparmor-utils  for other uses, such as aa-logprof  (to vie complains of processes)
+

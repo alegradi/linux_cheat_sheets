@@ -1,0 +1,31 @@
+The Kernel - 2nd Edition
+
+1, lsmod | less  (To see the kernel modules (drivers))
+
+2, modinfo "modulename"  (to see extended info of a module)
+
+3, To load or unload a module use  modprobe
+	- modprobe -r "modulename"  (to unload)
+	- modprobe "modulename"  (to load)
+	- dmesg  (to verify, kernel buffer ring print)
+
+4, To pass in options into the module
+	- In  /etc/modprobe.d/  place the "modulename.conf" file
+	
+	- In the file  options "modulename" "parameter"="value"
+		- example:  /etc/modprobe.d/cdrom.conf 
+		- options cdrom autoclose=1
+
+5, Optimizing the kernel can be done through  /proc
+	- Use  cat  on files, vim wont work, to see information
+	
+	- /proc/sys  contains cernel tunables
+		- For runtime edit  echo  value into files
+		- For permanent edit see  /etc/sysctl.conf  -overrides everything!
+		- See  /etc/sysctl.d/  for more info
+		- sysctl -a  to see all tuneables
+		- sysctl -a | grep "something"  to look for something specific
+		- sysctl -w net.ipv4.ip_forward=0  (to write a change to the tuneable)
+			- sysctl -p  (to apply changes)
+
+
