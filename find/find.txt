@@ -1,0 +1,45 @@
+The  find  command - 3rd Edition
+
+Basic usage
+- find /"where" -name "what"
+- find /etc -name "*hosts*"  needs double quotes, to escape bash
+
+Most common types of searches
+- name  case sensitive, looking for specifically
+	- find / -name “*.log”
+	
+- iname  case insensitive
+- type  (f – file, d – directory, c – character device, b – block device)
+- mtime  modification time
+	- find /var/log -mtime 0  (in the last 24 hours)
+
+- atime (access time)
+- size (k – kilobyte, M – MB, G – GB)
+	- find /home/user -size +100M
+	-find / -type f -mtime -50  (all files that have been modified in the last 50 days)
+- user
+	- find /var -user root
+	
+- perm  permissions
+	- find / -perm /a=x  (all executable files)
+	- find / -perm /u=s,g=s  (SUID SGID are set)
+	- find . -perm 777
+	
+Advanced usage, when combining with other commands, mainly  -exec
+
+Copy found files
+- find / -name "*dhcp*" -exec cp {} /find/dhcp/ \; 
+
+Copy files with specific size
+- find /etc -size +100k -exec cp {} /find/size \;
+
+Specific content in files
+- find /etc -exec grep -l password {} \; 2>/dev/null
+
+Sticky bit is set, list the directories, long, and redirect errors
+-find / -perm /o=t -exec ls-ld {} \; 2>/dev/null
+
+Find all files that contain the word password and copy them to the current dir!!
+- find /etc/ -exec grep -l password {} \; -exec cp {} . \; 2>/dev/null
+
+

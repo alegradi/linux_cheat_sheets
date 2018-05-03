@@ -1,0 +1,59 @@
+Apache web server -2nd 
+
+This is a very simple explanation for apache2 and enabling virtual hosts. Apache is capable much more than what is included here but this should be enough for the LFCS test
+
+Apache setup
+
+1, Install apache2
+
+2, Main configuration file is in:
+	- /etc/apache2
+
+3, To enable virtual hosts do the following (order can vary):
+	- Create a copy of  /etc/apache2/sites-available/000-				default.conf  with the name of the site.conf
+		- testserver.com.conf  for example
+	
+	- Edit the newly created file, and add the details of: (with examples)
+		ServerAdmin webasmter@localhost
+		ServerName testserver.com 
+		ServerAlias www.testserver.com
+		DocumentRoot /var/www/"Your directory"
+	
+	- Create the directory you specified in the config file and place the index.html 	there
+	
+	- Edit  /etc/hosts  file and include the newly created site
+		- 192.168.0.12   www.testserver.com testserver.com  for example
+	
+	- Open port 80 (or 443 for ssl) on the firewall
+	
+	- Create the symlink to enable the site
+		- From /etc/apache2/sites-available/"yoursite.conf" to 		/etc/apache2/sites-enabled/"yoursite.conf"
+	
+	- Reload apache config files
+		- systemctl reload apache2.service
+
+Restricting access to a site
+
+/etc/apache2/apache2.conf  or the site config file
+	</Directory /var/www/hostname/>
+		Order allow,deny
+		Allow from ip
+		Allow from ip
+Apache with SSL setup
+With self signed certificates
+
+mkdir /etc/apache2/ssl-certs  (I chose this)
+- in the folder
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl-certs/apache.key -out /etc/apache2/ssl-certs/apache.crt
+	x509  (is a type)
+	-nodes  (don’t encrypt key)
+Fill in the required info
+
+Server setup
+
+Ok, this can be a bit tricky, you might need to
+	- Create symlinks to enable ssl mod
+	- Use a .shtml instead of an .html
+	- Edit the default ssl-vhost.conf file in the /sites-available
+	- Open port 443 for ssl
+	- You will still receive an error from the browser because its going to be a self 	signed certificate… bastards
