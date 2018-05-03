@@ -1,0 +1,71 @@
+Partitioning, filesystems, encrypted fs - 2nd edition
+
+Partitioning
+- fdisk  “/dev/device”  (is the utility, max 4 primary partitions)
+- gdisk “/dev/devicename”  (up to 128 primary partitions)
+
+- fdisk -l  (to list all devices) or use  cat /proc/partitions  (to see all partitions)
+
+gdisk
+- gdisk -l “/dev/device”  (to see device and partition information)
+- gdisk “/dev/devicename"  (to work on that disc, interactive mode)
+	+2G  (for the size in gdisk, example)
+
+After using fdisk/gdisk you get a "kernel partition table synchronization error" use partprobe
+
+Filesystems
+mkfs tab tab to see possible filesystems to create
+- mkfs.ext4 “/dev/devicename"  (to create a filesystem with defaults)
+- mkfs.ext4 “/dev/device” -b 4096 -L spare_drive  (blocksize 4096, label)
+  
+Mounting devices
+- mount /dev/"devicename" /"mountpoint"  (to mount a partition)
+	- Example  mount /dev/sdb1 /mnt
+	- Can do by label (if there is) mount LABEL="label" /mnt
+	- umount /mnt  (to unmount the partition mounted at /mnt)
+	- mount -o remount /”mountpoint”  (to read changes from fstab)
+
+Swap
+To create a swap partition just create a partition first, then change its type to Linux/Swap
+- mkswap “/dev/diskname"  (to create the swap structure on it)
+-mkswap  “/dev/diskname” -L “label”  (to add a label)
+	- swapon “/dev/diskname"  (to manually mount)
+	- swapoff “/dev/diskname”  (to unmount)
+	- free -m  (to check the availability of the swap)
+Put it into fstab  /dev/"diskname"/  swap  swap  defaults  0 0 
+		- swapon -a  to activate
+
+Fstab examples
+If possible use UUID or labels to identify disks!
+/dev/sdb1  /xfs  xfs  defaults  0 0
+/dev/sda2  /  ext4  usrquota,grpquota 0 0  (to enable quotas) 
+LABEL=xfsfs /xfs  xfs  defaults 0 0 
+
+192.168.0.9:/nfs_share  /mnt/nfs  nfs  auto,intr  0 0  (nfs share) (man nfs)
+//server/share /mnt/smb  cifs  user=”smbuser”,password=”password”  0 0  (samba)
+
+- To test the fstab file,  mount -a  (mounts everything that is not mounted yet)
+
+Encrypted file-system (The order of operations is very important in this case)
+
+- Check for availability of  dm_crypt  module in the kernel
+- Create a partition
+- cryptsetup luksFormat /dev/"disk"
+- cryptsetup luksOpen /dev/"disk” “name"  (name is by which it will be recognized)
+	- Now the drive is created in /dev/mapper/"name"
+- mkfs."filesys" /dev/mapper/"name"  (can add label with -L "label")
+	- Can mount at this point manually by  mount 					/dev/mapper/"name" /"mountpoint"
+- To automate mounting
+	- /etc/crypttab
+		"name"  /dev/"disk"
+	-/etc/fstab 
+		/dev/mapper/"name"  /"mountpoint"  "filesys"  noauto  0 0
+	- noauto is important as requiring a password might trip up the boot process!!
+
+Misc
+For ssd driver make sure that fstrim is being run every now and then
+	- Look for  fstrim.timer  and  fstrim.service
+	- systemctl enable fstrim.timer  to have it run at intervals (check file)
+ 
+
+

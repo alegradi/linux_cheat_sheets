@@ -1,0 +1,71 @@
+Boot, GRUB and systemd -2nd 
+
+GRUB troubleshooting at startup
+
+At boot time hit esc to enter grub menu. You can change the loading config there, but thats runtime only.
+
+To enter rescue mode at boot time (requires root passw)
+	- Edit grub config at boot time, look for lines starting with linux or linux16 etc
+	- /boot/vmlinuz... add at the end  systemd.unit=rescue.target  hit ctrl+x
+	- This loads the kernel + minimal services
+
+To enter emergency mode at boot (requires root passw)
+	- Add  systemd.unit=emergency.target  
+	- Loads the kernel only, filesystem still read-only
+		- Use  mount -o remount,rw /  to get a writeable filesystem
+	- For a crash and reset use  echo b > /proc/sysrq-trigger
+
+To get a root shell without entering a password (in Ubuntu)
+	- Change ro to rw and add init=/bin/bash
+	- To reboot  exec /sbin/init
+	- You have to use  rd.break  in centos
+
+Edit grub settings at  /etc/default/grub  for persistent configuration
+	- Check also  /boot/grub/grub.cfg
+	- Also  /etc/grub.d/
+	- To generate new grub config file  grub-mkconfig -o /boot/grub/grub.cfg
+
+systemd 
+Is responsible for the boot process and it should cover all aspects of it, but it still doesn’t
+
+systemd main components can be found at  /usr/lib/systemd/
+	- To change something look for  /etc/systemd/ 
+	- Dynamically generated files are stored at  /run/systemd/
+
+systemctl  tab tab to see full list of options for commands, also read manpage
+	- systemctl -t help  to see all unit types
+	- man systemd.directives  to see what can be included in unit files, also  man 	systemd.unit
+
+Sockets can be used to have services not listening constantly
+	- Look for  .socket  files
+
+To know what can be included in a unit file
+	- systemctl show "servicename.service"
+	- man systemd.unit
+
+man systemd.directives
+
+To modify a unit file use  systemctl set-property "servicename.service" "param"="value"
+
+To have permanent changes that are not overriden by upgrades, save the .service file in  /etc/systemd/system
+	- Reload systemctl to have changes take effect  systemctl daemon-reload
+	- sudo systemctl status "servicename"  to see the changes taking effect
+
+Targets are a group of services. Some of them shows an endpoint in the booting process like: emergency.target or graphical.target
+	- Allow isolate  means it can be used as an endpoint
+	- For a target to know what services needs to be included look for  .target.wants. 	It will include symlinks to the services
+
+To know which target your system currently uses  systemctl get-default
+	- To change it to for example multi-user  systemctl set-default "multi-user.target"
+
+To know currently requested units  systemctl list-units
+	- do  systemctl list- tab tab to see the rest(study them!)
+	- systemctl list-units --all  to see inactive ones as well
+
+systemd – sysvinit madness ?!?
+
+/etc/init.d/  contains the scripts
+/etc/rc#.d/   links these scripts
+/etc/init/  config files, plus .override files for the scripts
+ 
+

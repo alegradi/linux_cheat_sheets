@@ -1,0 +1,41 @@
+sses - 3rd Edition
+
+Bash - basics
+In bash if something is running use ctrl+z to pause it
+- bg  (to have it run in the background)
+- jobs (to check what is running in the background)
+- fg # (to bring something to the foreground (or just fg for the last one placed there))
+	
+- can start a command to run in the background with & added at the end  sleep 600 &
+
+top
+- 1  for seeing the number of cpu cores
+- f  for fields (in there press s on a field to sort by that)
+- top -u "username" to see processes run by that user
+- W to save new settings
+- r  for renice (-20 very not nice - to 19 which is very nice to others)  
+
+ps
+to see the list of processes, two main uses  ps aux  or  ps axjf  for a treelike view
+	- ps aux | less  (for all processes (always use less))
+	- ps aux --sort pmem (to sort on process memory)
+	- ps axjf
+
+nice and renice
+	- nice -n #(-20 - 19) command
+	- renice -n # PID
+
+kill
+	- kill -l  (to see list of signals)
+	- man 7 signal  (for a thorough description of signals)
+	- SIGTERM 15  (to nicely close something (might be ignored))
+	- SIGKILL 9  (to murder brutally (avoid using if possible))
+	- killall "programname" (to kill all instances)
+ 	- kill PID  (to send a signal)
+	- kill -9 PID (also works)
+	
+
+pgrep “programname”  (to search in a better way!)
+pidof "programname" (to show the PID numbers of said program) "programname" to show the PID numbers of said program
+
+
