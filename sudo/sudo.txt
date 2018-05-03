@@ -1,0 +1,45 @@
+Sudo - 3rd Edition
+
+- visudo  (to edit the /etc/sudoers config file), man sudoers (look for examples)
+
+Aliases 
+Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig (for example)
+Cmnd_Alias SHUTDOWN_CMDS = /sbin/poweroff, /sbin/reboot, /sbin/halt
+Cmnd_Alias PRINTING_CMDS = /usr/sbin/lpc, /usr/sbin/lprm
+
+User_Alias USERS = tom, dick, harry
+User_Alias ADMIN = %admin  (everybody from the group admin)
+User_Alias LIMITED = USERS, !ADMIN  (includes the USERS alias but not ADMIN)
+
+Host_Alias SERVERS = 192.168.0.5, 192.168.1.72, server5
+Host_alias NETWORK = 192.168.0.0/255.255.255.0
+
+User specifications – Where it all comes together
+<user list> <host list> = <operator list> <tag list> <command list>
+
+ADMIN	ALL = NOPASSWD: 	ALL
+# Users of ADMIN alias may run any command on any host without password auth
+
+jack	SERVERS = ALL
+#jack can run any command on the machines in SERVERS 
+
+operator 	ALL = SHUTDOWN_CMDS, NETWORKING 
+#operator may run commands defined in  SHUTDOWN_CMDS, NETWORKING on all machines
+
+lisa 	ALL = /sbin/useradd  
+#so that lisa can use useradd on all machines without being root
+
+fred	ALL = (ALL)	NOPASSWD: 	SHUTDOWN_CMDS
+#fred may us all the SHUTDOWN_CMDS on any machine without being asked for a password
+	
+Others
+
+- su - "user"  to log in as "user", you need to have the “user” password to be able to use it, or you have to be root, being a sudoer is not enough
+
+su -  (to log in as root)
+
+sudo -i  (to start a new session as root)
+
+chvt #  (to change to that virtual terminal is the same as  ctrl+alt+f#) 
+/etc/securetty  (contains the consols that root can log into (secure ports/consoles))
+

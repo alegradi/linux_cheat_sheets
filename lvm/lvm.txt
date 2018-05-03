@@ -1,0 +1,67 @@
+LVM - Logical Volume Management - 2nd Edition
+
+Hierarchy
+	^	Filesystem
+	|	Logical Volume
+	|	Volume Group
+	|	Physical Volume
+	|	Partition ( need to be set as LVM in order to use as Physical volume)
+	–	HDD
+Always start from the bottom and work your way up ( at resizing the same applies)
+
+Physical Volume
+- pvcreate /dev/"disk"  (to create a physical volume)
+- pvremove /dev/”disk”  (to remove a physical volume from the pool)
+- pvs  (to display physical volumes in short)
+- pvdisplay (to display detailed info on them)
+
+Volume Group
+- vgcreate "vgname" /dev/"disk"  (to create a volume group from physical volumes)
+- vgremove “vgname”  (to remove a volume group)
+- vgextend “vgname” /dev/”disk”  (to extend the volume group)
+- vgreduce “vgname” /dev/”disk”  (to remove a physical volume from a volume g)
+- vgdisplay
+- vgs
+
+Logical Volume
+- lvcreate  -L "size" -n "name" "name of the volume group"
+	- lvcreate -L 1G -n home vg1  (for example)
+	- lvcreate -l 756 -n home vg1  (size in extents)
+- lvextend -r -L “size” /dev/”vgname”/”lvname”  (with resizing the filesystem)
+	- lvextend -r -L +1G /dev/vg_1/lvm_home  (adding 1G)
+	- lvextend -r -l +100%FREE /dev/vg1/lvm1  (to extend with extents)
+- lvreduce -r -L -2G /dev/”vgname”/”lvname”  (to reduce with 2G)
+- lvremove /dev/”vgname”/”lvname”  (to remove an lvm)
+- lvdisplay
+- lvs
+
+Filesystem
+mkfs.ext4 -L “label” /dev/mapper/”device”
+
+Mounting
+To mount it persistently, you need to hunt down the device first in /dev/. Its going to be probably in /dev/"volume group name"/"logical volume name"
+- Add a filesystem to it, for example ext4
+	- mkfs.ext4 /dev/...
+- Add entry to  /etc/fstab  with the symlink to the device in /dev/mapper/ like:
+	/dev/mapper/"vgname-lvname"  /"mountpoint"  "fs"  defaults  0 0	
+- Can do by LABEL for which use  tune2fs -L "label" /dev/...
+	LABEL="label"  /"mountpoint"  "fs"  defaults  0 0
+- Can do by UUID for which use  blkid to show the UUID
+	UUID="UUID......"  /"mountpoint"  "fs"  defaults  0 0
+	
+- Mount with  mount -a  when done
+	- verify with  mount
+
+Resizing LVM
+For resizing remember to start at the bottom of the hierarchy always!! 
+	
+To extend the file system follow the order
+- Make a partition available, create and make it Linux LVM
+- vgextend "vgname"(existing on to be extended) /dev/"disk"(new partition you created)
+	- Does  pvcreate  automatically!
+- lvextend -r(resize filesystem!!!) -l +100%FREE(extents) /dev/"vgname"/"lvmname"(to be extended)
+	
+To reduce the file system follow the order
+- lvreduce -r -L "size"(2G for ex) /dev/"vgname"/"lvname"
+- vgreduce /dev/"vgname" /dev/"physical volume"
+

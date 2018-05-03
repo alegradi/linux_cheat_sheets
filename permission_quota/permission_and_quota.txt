@@ -1,0 +1,83 @@
+Permissions and quotas -2nd 
+
+Basic permissions 
+
+		File 	Directory
+read (4)	read	list
+write (2)	modify	Create, delete
+execute (1)	run	cd
+
+
+1, To change ownership
+- chgrp "group" "file/folder"
+	- chgrp -R admin /var/log  (recursively)
+
+- chown "user":"group" "file/folder"
+	- chown -v root:staff /u  (verbose)
+	- chown root /u 
+
+2, To change permissions
+- chmod g+w /home  for example (relative mode)
+- chmod o-rx /home 
+	
+- chmod 700 "file"  for example (absolute mode)
+
+Advanced permissions
+
+
+		File				Directory
+SUID (4)	Run as owner !!! (danger)	-
+SGID		Run as group owner!!! 		New files inherit group o.
+Sticky bit (1)	-				Can delete only if owner
+
+chmod u+s "file"  (Set UID, command is executed as owner of the file and not the person running it. Very dangerous!)
+
+chmod g+s  (Set GUID, files created will get the parent directory ownership)
+
+chmod o+t  (Sticky bit, only the owner of the file, or the owner of the group can delete the file)
+
+Finding files with specific permissions
+man find  search for  -perm
+
+- find . -perm 0600 -exec ls -l {} \;
+- find . -perm 4000 -exec ls -l {} \;
+	- Looking for setUID
+
+1, Acces control lists
+Normal -> Which applies to existing files
+Default -> Applies to new files
+
+getfacl "file/directory" (to see ACLs)
+
+setfacl -R -m g:sales:rx account (order important)
+	- Recursive, modify, sales group gains read and execute on account folder
+
+setfacl -m d:g:sales:rx accounts 
+	- sets default ACL
+setfacl -b  (to restore default (user, group, owner))
+
+Attributes - Applies to files only
+Needs fs support, if not available, needs to use  user_xattr  as option on mount
+
+- man chattr  (to see all supported attributes by file systems)
+- chattr +i "file"  (adds the immutable attribute to the file)
+	+a “file”  (append only) 
+- lsattr "file"  (to see attributes of a file)
+
+File system quota in ext4 
+Needs to have  quota  package installed. The filesystem needs to support the quota, so in /etc/fstab  you need to have  usrquota,grpquota  (in place of defaults)
+
+- chmod -R 777 /"mountpoint"  (to make sure the mountpoint is accessible)
+
+- quotacheck -mavug  (creates aquota.group, aquota.user )
+- quota -vu "user"  (to see current quota settings)
+- quotaon -a  (to enable quotas, make sure it starts on boot)
+- edquota -u "username" or -g "groupname"  (to edit quotas)
+	- This is a file edited in vi. Just change the values there. inodes refers to number of files (which is dumb)
+	- Test it with  dd if=/dev/zero of=/quota/bigfile bs=1M count=3 
+		- bs  blocksize, this would be a 3MB file
+
+- edquota -p "user1" "user2"  (to copy quota settings from user1 to user2)
+- repquota -aug  (to see current quotas)
+
+

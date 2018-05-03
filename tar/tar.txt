@@ -1,0 +1,51 @@
+Tar – basic usage - 3rd edition
+
+Creating tarballs
+
+tar -cvf “filename” “folder to be compresed”
+	- c  create
+	- v  verbose
+	- f  file
+
+Other useful uptions include:
+	- z compress with gzip (-czvf)
+	- j compress with bzip2  
+	- --exclude=”file/folder” 
+		- folder –exclude=”../folder”
+		- filetype  --exclude=*.sh
+	- r  add a file to a tarball
+		- tar -rv “file” -f “archive.tar”
+
+Examples:
+	tar -cvf archive.tar /home
+	tar -czvf archive.tar.gz /home/user/Documents
+	tar -czvf backup.tar.gz / --exclude=/mnt
+
+Extracting tarballs
+
+To extract a file  tar -xvf "filename" (order is important), normally extracted at current location
+	- x  for extract
+	- v  for verbose
+	- f  for the file's name
+	- p  to maintain original permissions (-xpvf)
+	- C to specify extract folder
+Examples:
+	tar -xvf archive.tar
+	tar -zxvf archive.tar.gz 
+	tar -zxvf archive.tar.gz -C /home/user/restore/
+
+Other operations with tarballs
+
+If unsure about the kind of file/compression
+	- file "filename"  (will give info)
+
+To see what is inside a normal tarball  
+	- tar tvf "filename"
+	- tar ztvf “filename”  (if its compressed with gzip)
+
+Just to compress a tarball with gzip
+gzip archive.tar
+
+Just to extract but leave tarball 
+gunzip "filename" (*.gz2 files normally)
+
