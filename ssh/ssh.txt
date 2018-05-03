@@ -1,0 +1,93 @@
+SSH related commands and useful configurations -2nd 
+
+ssh
+
+1, The SSH serverside configuration is at
+	- /etc/ssh/sshd_config
+		Port 22  ->  443  (for example)
+		PermitRootLogin no  (to not allow root login!!!)
+		PasswordAuthentication no  (to allow key based login only)
+		X11Forwarding yes  (to run gui tools through ssh)
+
+2, Basic usage
+	- ssh -X tusko@192.168.0.9 -p 443 
+		- X11 Forwarded, tusko user on port 443
+	- ssh "hostname"  (works only if you set up your user config file, see later)
+		
+3, Its prefered to set up key based authentication over password auth. 
+	- ssh-keygen -t rsa -b 4096  (with defining the type and the size)
+	- ssh-copy-id -i "file" -p "port" "user"@"hostname"  (to copy the public key nicely)
+	- Or you can just do it manually
+
+4, Tunneling – extra knowledge
+ssh tunneling – When you have a server on the public Internet.
+- set ssh server to listen on port 443 (its almost never blocked)
+ssh -N -D 8080 user@ip -p 443
+	- No login
+	- Bind to port 8080 on the local machine
+- In Firefox, settings, advanced, proxy settings, 
+	- Socks Host 127.0.0.1  port 8080
+
+The  ./ssh/config file
+	 - example
+	### default for all ###
+Host *
+	ForwardAgent no
+	ForwardX11 no
+	ForwardX11Trusted yes
+	User tusko
+	Port 22
+	Protocol 2
+	ServerAliveInterval 60
+	ServerAliveCountMax 30
+
+## Override as per host ##
+
+#Raspi#
+Host pi
+	HostName 192.168.0.9
+#	User pi
+	
+
+
+
+scp 
+
+scp pull  option - to ask file to be copied from remote location to present location
+	scp -P 443 user@ip:/folder/file . 
+
+scp push option – to push a file across the network to a remote location
+	scp -P 22 “file” user@ip:/folder/ 
+
+-P #  to define a port number
+-v  for verbose output
+
+rsync
+
+rsync  is perfect for syncing large amount of data, and whole directories (only works on port 22 right now, for me)
+
+rsync pull option - 
+	rsync -avz user@ip:/folder/ /”local folder”
+
+rsync push option -
+	rsync -avz /tmp user@ip:/home/user/tmp  
+		- archive 
+		- verbose
+		- compress for transport
+
+sftp
+sshd_config  file look for the sftp line, If uncommented, it should work
+
+- sftp user@ip  (to log into the interactive shell and establish a connection)
+	- for local uses, prepend commands with an l
+		- lpwd
+		- lls
+	
+	- for remote uses just use the usual commands
+		- pwd, ls, cd
+
+- get  to pull files/folders
+- put  to push files/folders
+
+Using a .ssh/config  file can make your life much much easier
+

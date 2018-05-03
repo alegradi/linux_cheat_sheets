@@ -1,0 +1,37 @@
+RAID - 3rd Edition
+
+1, First you need at least 2 devices/partitions prepared. The type should be set to  Linux Raid 
+	- Might need  partprobe when finished
+
+2, mdadm  for "Multi Disk Admin"
+	- mdadm --create /dev/"devicename" --level="raid number" --raid-disks="numberof disks" /dev/"disk1" /dev/"disk2"
+	- mdadm --create /dev/md0 --level=1 --raid-disks=2 /dev/sdb2 /dev/sdb3  for example
+	- mdadm --manage --stop /dev/md0  (to stop RAID (important))
+
+3, Place a file system on the new device
+	- mkfs.ext4 /dev/"devicename"
+
+4, Write the raid configuration to a configuration file
+	- mdadm --detail --scan >> /etc/mdadm.conf
+	- this will contain info for enabling auto mount
+
+5, Create a mount point
+
+6, Place entry in  /etc/fstab  for auto mounting
+	- /dev/md0  /raid  ext4  defaults 0 0 
+
+7, To make sure raid is operational  cat /proc/mdstat  or
+	- mdadm --detail /dev/md0
+
+8, To recover from a disk failure, useful to have a RAID member as a hot spare
+	- When creating  mdadm --create /dev/md0 -l 5 -x 1 /dev/sdb /dev/sdc /dev/sdd /dev/sde 
+		- x 1  (means there will be one hot spare created)
+	- mdadm --fail /dev/md0 /dev/sdb  (to fail a device) 
+	- mdadm --remove /dev/md0 /dev/sdb  (to remove after failure)
+	- mdadm --add /dev/md0 /dev/sde
+	- mdadm /dev/md1 -a /dev/sdb2  (to add a spare disk)
+
+9,  To examine weather a disk is part of a RAID array, and delete the superblock
+- mdadm --examine /dev/”device”
+- mdadm --zero-superblock /dev/"devicename"  
+

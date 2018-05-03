@@ -1,0 +1,45 @@
+Working with text files - 3rd edition
+
+cut
+For selecting only sections of a text from a file
+- cut -d : -f 3,4 /etc/passwd | sort -n  
+	- delimitor is :
+	- field 3 and 4 
+	- piped through  sort  for numerics
+
+sed  
+For editing text on the go
+- sed -i ‘s/look for this/replace with this/g’ “filename”  (basic usage)
+ 
+- sed -i -e '10d' "file"  (to delete the 10th line in "file")
+- sed ‘s/a/A/g’ “file”  (to replace a to A throughout the file)
+- sed ‘s/adam/ADAM/g’ “file” 
+-sed -i ‘/^6666/ c\this text’ “filename”  (to replace the string starting with 6666 with some text)
+- sed 's/and/\&/g;s/^I/You/g' ahappychild.txt  (to replace and with &, and any line starting with I with You)
+
+awk
+- awk -F : '{ print $1 }' /etc/passwd  (delimitor is : and print the first field)
+
+uniq  
+To find duplicate lines, with no options it will not print duplicate lines
+- cat /var/log/kern.log | uniq
+
+nl  
+To number lines
+- nl “filename” 
+
+fmt
+As text formatter
+- fmt -u “file”  (for uniform formatting (eliminates indentation, extra spaces))
+
+sort
+To sort through lines of text
+- sort -r “file”  reverse sorting
+- sort -n “file”  numeric sorting
+
+grep
+- grep -i bacigalupi /etc/superinfo  (to ignore case)
+- ls -l /etc/ | grep rc[0-9]  (to grep for anything starting with rc and number from 1-9)
+- grep -r sudo /etc  (to grep in files, recuresively for sudo)
+
+
