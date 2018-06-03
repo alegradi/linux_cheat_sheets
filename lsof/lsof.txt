@@ -1,0 +1,11 @@
+lsof
+
+The many uses of lsof
+
+lsof /path/to/file  (to see what is using that file)
+lsof -p "PID"  (to see all files a process has open)
+lsof -u "username"  (to see all files a user has open)
+lsof -i :80  (to see what is using port 80)
+lsof -i tcp  (what is tcp using)
+
+
