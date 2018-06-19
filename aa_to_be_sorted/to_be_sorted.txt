@@ -9,4 +9,8 @@ iptables -L -n
 ls -ltr
 atop -afp 1
 
+ssl testing
+~]$ nmap -sV --script ssl-enum-ciphers -p 443 "ip"
+
+
 
