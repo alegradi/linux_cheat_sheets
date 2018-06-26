@@ -1,0 +1,6 @@
+Curl
+
+curl -I "domain.name"  (to fetch the HTTP header only)
+curl -IL "domain.name"  (getting header and follow to new location in case the answer is 3xx)
+
+time curl -IL "domain.name" (to know how long it takes for a response!)

@@ -1,0 +1,12 @@
+Collection of all kinds of cool things to be done on the Linux command line
+
+wttr.in
+curl wttr.in/"location"  (to get weather report)
+curl wttr.in/manchester  (for example)
+curl wttr.in/Moon  (for the current Moon phase)
+curl wttr.in/Moon@2018-05-25  (for a set date)
+
+
+
+
+

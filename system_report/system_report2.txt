@@ -1,0 +1,27 @@
+Typical system report tools
+
+echo "ALL PROCESSES RUN BY ROOT" >> systemuse.rep && ps -u root >> systemuse.rep
+
+Memory
+free -m  (for all available memory in human readable)
+
+HDD
+- df -h
+- df -hTi  for inodes
+
+- du -h "folder"
+- du -sch "folder"  for total utilized space
+
+Processes
+- ps aux
+- ps ef | grep "process"  very very detailed
+
+Kernel
+- dmesg
+
+
+nginx - access log 
+cat access.log | awk -F " " '{ print $1 }' | sort | uniq  (gives you number of unique visitor ips)
+cat access.log | awk -F " " '{ print $1 }' | sort | uniq -c  (give you the number of hits by that ip)
+
+
