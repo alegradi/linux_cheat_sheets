@@ -2,6 +2,7 @@ CentOS package handling with yum, rpm
 
 yum
 
+yum check-update  (to see the packages that can be updated, but will not run update!!)
 yum update  (to update package info, and sys)
 yum list "package"  (get list of packages with "package" name)
 yum search "package"  (to search for a package)
