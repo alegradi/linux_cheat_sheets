@@ -12,5 +12,7 @@ atop -afp 1
 ssl testing
 ~]$ nmap -sV --script ssl-enum-ciphers -p 443 "ip"
 
-
+curl useful ones
+]# curl -IL "domain.name"
+time curl -I "domain.name"
 
