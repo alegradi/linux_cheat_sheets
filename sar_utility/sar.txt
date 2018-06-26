@@ -1,0 +1,12 @@
+SAR utility
+
+Install sysstat (on ubuntu)
+
+sar
+-d  report on each block device
+-P ALL  report on all cpus
+-s hh:mm:ss set starting time 
+
+-q  (to report queue length and avarage load)
+
+
