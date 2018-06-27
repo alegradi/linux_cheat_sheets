@@ -101,4 +101,5 @@ iptraf  (to check performance on local network)
 dstat  (for varied reports on disk/network usage)
 dstat 5 10  (for 5 second intervals and 10 iterations)
 
-
+hostname
+hostnamectl set-hostname "hostname"  (to change the hostname, does not require restart)
