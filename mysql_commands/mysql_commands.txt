@@ -28,3 +28,8 @@ Users
 - grant all privileges on *.*  (to grant admin privileges to it)
 - drop user 'Feri'@'localhost';  (to erase that user)
 
+MySQL dump
+- mysqldump -uadmin -p --all-databases >> dump.sql
+
+
+
