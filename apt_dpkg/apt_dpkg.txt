@@ -1,0 +1,42 @@
+dpkg  The debian package handler, backend
+
+To see what is installed on the system through dpkg
+	- dpkg --get-selections
+To see what files are in a given package
+	- dpkg -L "name"
+To see what package does a file come from
+	- dpkg -S "name"
+To see package information 
+	- dpkg -p "name"
+
+apt  Aptitude the high level frontend 
+
+apt-cache  to see cached information of packages
+	- apt-cache search "package" (for normal search)
+	- apt-cache policy "package" (to see if its installed)
+	- apt-cache stats  (to see statistics of the cache)
+
+
+apt-get or apt to manage packages
+	- apt-get update  (to update caching information)
+	- apt-get install "package"
+	- apt-get check  (for broken packages)
+	- apt-get autoclean  (clears caching information of bad packages)
+	- apt-get remove "package"
+	- apt-get remove --purge “package”  (to remove it with its dependencies & config) 
+	- apt-get upgrade or use dist-upgrade (which is better on dependencies)
+	- apt-get changelog “package”  (to see the changelog of that package)
+	- apt-get download “package”  (to download a package only)
+
+apt-file 
+- apt-file find “package”
+
+You can also just run  aptitude  for commander-like administration of packages
+
+
+Adding 3rd party repositories
+	- add-apt-repository pp:nginx/stable  (for example)
+
+ ldd  to print shared dependencies, if not updated  ldconfig
+	- ldd /bin/bash  (for example)
+
