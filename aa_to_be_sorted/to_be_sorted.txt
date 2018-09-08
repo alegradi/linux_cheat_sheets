@@ -24,3 +24,4 @@ grep -e "shutdown" /home/*/.bash_history
 grep -e "reboot" /home/*/.bash_history
 
 
+dd
