@@ -9,6 +9,9 @@ ssh
 		PasswordAuthentication no  (to allow key based login only)
 		X11Forwarding yes  (to run gui tools through ssh)
 
+After making changes to the sshd_config you can check the syntax with
+sshd -t
+
 2, Basic usage
 	- ssh -X tusko@192.168.0.9 -p 443 
 		- X11 Forwarded, tusko user on port 443
