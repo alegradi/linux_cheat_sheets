@@ -1,0 +1,23 @@
+Opening second instance of mysql
+
+1,ps axfu | grep mysql  (to verify where to run mysql from)
+
+2,For example: /usr/sbin/mysqld
+/usr/sbin/mysqld --socket=/tmp/mysql2.sock --datadir=[RESTORED DATA DIRECTORY] --skip-networking --pid-file=/tmp/mysql2.pid --user=root
+(or with the added options: --innodb_force_recovery=5 --skip-networking --innodb_purge_thread=0)
+
+3,Open up another ssh session or use TMUX to connect to this new socket and test the connection with the following:
+
+4,mysql -S /tmp/mysql2.sock
+If the server has plesk and you need a password, use: "-uadmin -p`cat /etc/psa/.psa.shadow`"
+
+5,Then run a MySQL dump:
+mysqldump -S /tmp/mysql2.sock [DATABASE] [TABLE(optional)] > [DIRECTORY YOU WANT TO RESTORE TO].sql
+
+6,Close the second instance:
+mysqladmin -S /tmp/mysql2.sock shutdown
+
+If the above doesn't work to close the second instance, then find the PID with the below and kill it:
+
+ps axfu | grep mysql
+
