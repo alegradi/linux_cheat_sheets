@@ -1,0 +1,39 @@
+Centos 7 (PCS) commands
+
+Basics
+pcs status  (to Get basic status)
+pcs status --full  (to get more detailed status)
+pcs resource enable  (to allow cluster to start resource)
+pcs resource disable  (to stop resource if running and forbid from starting again)
+pcs resource restart [node]  (to restart resource optionally on another node. For example: r_web_php-fpm)
+pcs resource move  (to move resource to another node)
+pcs resource show  (to show all resources)
+pcs resource show --full  (to show all resources in more detail)
+pcs resource show  (to show a specific resources details)
+pcs resource cleanup  (to cleanup errors, forget about history of failures)
+
+Adding resources
+pcs resource create Cluster_VIP ocf:heartbeat:IPaddr2 ip=10.0.0.44 cidr_netmask=24 op monitor interval=20s  (to Add a VIP)
+pcs resource enable Cluster_VIP (to Enable the resource)
+pcs resource move [destination node] (to Moving resources)
+
+Constraints
+pcs constraint show --full  (to to list current constraints)
+remove a constraint, useful for bad location constraints
+
+pcs constraint remove  (to remove a constraint, useful for bad location constraints)
+pcs constraint colocation add Website with ClusterIP INFINITY  (to tell website and VIP to always be on the same node)
+pcs constraint order ClusterIP then Website  (to tell the VIP to start before the webservice)
+pcs constraint location Website prefers node1=50  (to tell a service to prefer a node )
+
+Cluster setup
+yum -y install pacemaker pcs  (to Install the packages)
+systemctl start pcsd.service; systemctl enable pcsd.service  (to start and enable service)
+passwd hacluster  (to Set credentials for auth)
+pcs cluster auth ha-training-1 ha-training-2  (to Allow the nodes to talk to pcs)
+pcs cluster setup --name hatraining ha-training-1 ha-training-2  (to Create the cluster and add nodes)
+pcs property set stonith-enabled=false  (to Disable fencing (one node))
+systemctl enable corosync.service; systemctl enable corosync.service  (to Start and enable corosync)
+pcs cluster start --all  (to Start all cluster services)
+
+
