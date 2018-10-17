@@ -1,7 +1,9 @@
 MYSQL commands
 
 After the installation is done
-mysql -u "username" -p  (to log in as that user, and prompt for the password)
+- mysql -u "username" -p  (to log in as that user, and prompt for the password or)
+- mysql -uadmin -p`cat /etc/psa/.psa.shadow`  (to log in to plesk protected db)
+- plesk db  (for not protected mysql instance on plesk panel server)
 
 In mysql end every command with ";". Also in most documentation, the commands are written all capital, however this is not a must.
 
@@ -19,7 +21,6 @@ Databases and tables
 (\N for entering null into a field, this only works, when loaded from a file)
 - insert into "pet" values ('stuffy', ... NULL);  (to insert data manually, use null for missing info)
 
-
 Users
 - select user, host from mysql.user;  (to show all existing users and their host information)
 - show grants for 'username'@'host'  (to see "username"'s rights)
@@ -30,6 +31,20 @@ Users
 
 MySQL dump
 - mysqldump -uadmin -p --all-databases >> dump.sql
+Database dump for plesk
+- mysqldump -uadmin -p`cat /etc/psa/.psa.shadow` psa > psa_bak.sql
 
+Watching mysql processes
+- watch -n0.5 'mysql -uadmin -p`cat /etc/psa/.psa.shadow` -e "show full processlist;"' (plesk edition)
+- watch -n0.5 'mysql -e "show full processlist;"' (generic)
 
+mysqltuner
+- wget -O mysqltuner.pl mysqltuner.pl
+- perl mysqltuner.pl
 
+Determining db engines:
+innodb/myisam
+mysql -e "SELECT TABLE_SCHEMA as DbName ,TABLE_NAME as TableName ,ENGINE as Engine FROM information_schema.TABLES WHERE ENGINE='MyISAM' AND TABLE_SCHEMA NOT IN('mysql','information_schema','performance_schema');"
+
+etc
+mysqlcheck --repair --all-databases
