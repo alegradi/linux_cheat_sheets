@@ -35,6 +35,9 @@ MySQL dump
 Database dump for plesk
 - mysqldump -uadmin -p`cat /etc/psa/.psa.shadow` psa > psa_bak.sql
 
+MySQL import
+- mysql -u username -p database_name < file.sql
+
 Watching mysql processes
 - watch -n0.5 'mysql -uadmin -p`cat /etc/psa/.psa.shadow` -e "show full processlist;"' (plesk edition)
 - watch -n0.5 'mysql -e "show full processlist;"' (generic)
