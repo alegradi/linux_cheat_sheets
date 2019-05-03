@@ -1,0 +1,21 @@
+Bash related snippets to make your life easier
+
+Bash control with ~/.bash_profile
+
+Enable timestamps
+export HISTTIMEFORMAT="%d-%m-%y %T "
+
+Setting 5000 line history
+export HISTSIZE=5000
+
+Ignore specific commands
+export HISTIGNORE="ls:ps:history"  (will ignore ls, ps, history related commands)
+
+Control history file
+ignorespace - don’t save lines which begin with a <space> character
+ignoredups - don’t save lines matching the previous history entry
+ignoreboth - use both ‘ignorespace’ and ‘ignoredups’
+erasedups - eliminate duplicates across the whole history
+
+for example:
+export HISTCONTROL=ignoredups:erasedups
