@@ -3,33 +3,39 @@ iptables - basics
 iptables might have a clonflict with network-manager so make sure its removed.
 
 Basic iptables commands
-- iptables -L  (to see current rules)
-- iptables -L -v --line-numbers  (for numbered rules)
+iptables -L  (to see current rules)
+iptables -L -v --line-numbers  (for numbered rules)
+iptables -vnL  (verbose,no DNS resolution, current rules)
 
-- iptables --flush  (to erase previous rules)
-
-- iptables -P FORWARD/INPUT/OUTPUT DROP/REJECT/ACCEPT  (to set defaults)
+iptables -P FORWARD/INPUT/OUTPUT DROP/REJECT/ACCEPT  (to set defaults)
 	- on Internet facing devices use DROP 
 	- on local network facing devices use REJECT (as it gives a REJECT answer back)
 
-- iptables-save > "file"
-- iptables-restore < "file"
+iptables-save > "file"
+iptables-restore < "file"
 
 Loopback
-- iptables -A INPUT -i lo -j ACCEPT
-- iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 
 SSH on port 22 (for incoming)
-- iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-- iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 SSH on port 22 (for initating ssh)
-- iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
-- iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 
 Advanced uses
+iptables -A INPUT --protocol icmp --in-interface enp0s3 -j DROP  (to drop all icmp requests coming in on enp0s3)
+iptabels -I INPUT -s 192.168.0.12 -j DROP -m comment --comment "Blocking .12"  (to block source IP with comments, inserting the rule)
 
-- iptables -A INPUT --protocol icmp --in-interface enp0s3 -j DROP
+Removing rules
+iptables -D INPUT -s 192.168.0.12 -j DROP  (to remove the rule by precise syntax)
+
+
+Use with extreme care!
+- iptables --flush  (to erase all previous rules, might break ssh connection also)
 
 
