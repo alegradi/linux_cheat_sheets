@@ -1,0 +1,5 @@
+cPanel related command line tools
+
+Show password to be able to log in
+whmapi1 create_user_session user=root service=whostmgrd
+
