@@ -42,4 +42,5 @@ Sticky bit is set, list the directories, long, and redirect errors
 Find all files that contain the word password and copy them to the current dir!!
 - find /etc/ -exec grep -l password {} \; -exec cp {} . \; 2>/dev/null
 
-
+Exclude parameter from find
+find /var/www/vhosts/example.com/htdocs/ -type d -not -user example  (this will show you all directories not belonging to the domain user)
