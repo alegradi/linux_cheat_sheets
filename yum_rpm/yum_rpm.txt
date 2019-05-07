@@ -24,7 +24,11 @@ yum --enablerepo="id" install "package"  (to enable repo by "id" and install a p
 
 yum clean all  (to do cleanup)
 yum history  (to see history of yum usage)
+yum history list all  (to see full list of update history)
+yum history info "transaction ID"  (to see the details of that update)
+yum history undo "transaction ID"  (to try and roll back and update)
 
+yum --showduplicates list "package" | expand  (to see different versions of the same package)
 
 rpm
 
