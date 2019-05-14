@@ -1,0 +1,23 @@
+Disk Performance related commands
+
+FIO - Flexible In/Out Tester
+Installation
+yum install fio  (to install on Centos, epel required)
+apt-get install fio  (Debian)
+
+Tests can take quite some time so run them with consideration
+Random read/write performance test
+fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=0 --name=test --filename=random.fio --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75 | grep IOPS; rm -f random.fio
+fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=0 --name=test --filename=random.fio --bs=256k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75 | grep IOPS; rm -f random.fio
+fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=0 --name=test --filename=random.fio --bs=4m --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75 | grep IOPS; rm -f random.fio
+Random read performance test
+fio --name=randread --ioengine=libaio --iodepth=16 --rw=randread --bs=4k --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+fio --name=randread --ioengine=libaio --iodepth=16 --rw=randread --bs=256k --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+fio --name=randread --ioengine=libaio --iodepth=16 --rw=randread --bs=4m --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+Random write performance test
+fio --name=randwrite --ioengine=libaio --iodepth=1 --rw=randwrite --bs=4k --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+fio --name=randwrite --ioengine=libaio --iodepth=1 --rw=randwrite --bs=256k --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+fio --name=randwrite --ioengine=libaio --iodepth=1 --rw=randwrite --bs=4m --direct=1 --size=4G --numjobs=2 --runtime=240 --filename=random.fio --group_reporting | grep IOPS; rm -f random.fio
+
+
+
