@@ -19,3 +19,7 @@ erasedups - eliminate duplicates across the whole history
 
 for example:
 export HISTCONTROL=ignoredups:erasedups
+
+Clear Bash and MySQL history
+cat /dev/null > ~/.mysql_history && cat /dev/null > ~/.bash_history && history -c
+
