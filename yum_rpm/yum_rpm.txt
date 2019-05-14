@@ -28,6 +28,9 @@ yum history list all  (to see full list of update history)
 yum history info "transaction ID"  (to see the details of that update)
 yum history undo "transaction ID"  (to try and roll back and update)
 
+Show when something was installed
+rpm -qa --queryformat '(%{installtime:date}) %{name}\n' packagename
+
 yum --showduplicates list "package" | expand  (to see different versions of the same package)
 
 rpm
