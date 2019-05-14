@@ -52,6 +52,8 @@ mysql -e "SELECT TABLE_SCHEMA as DbName ,TABLE_NAME as TableName ,ENGINE as Engi
 
 etc
 mysqlcheck --repair --all-databases
+mysqlcheck <dbname> <tblname>  (to check specific table)
+mysqlcheck <dbname> <tblname> -r  (to attempt to fix a specific table)
 
 Saving the root password in a file for easier access:
 - for the desired user (very likely to be root) create the file ~/.my.cnf
