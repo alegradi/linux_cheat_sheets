@@ -30,13 +30,18 @@ Users
 - drop user 'Feri'@'localhost';  (to erase that user)
 
 MySQL dump
-- mysqldump -uadmin -p --all-databases >> dump.sql
+- mysqldump -uadmin -p --all-databases >> dump.sql  (simple version)
 - mysqldump -uadmin -p --all-databases --events --triggers --routines > all_db.sql  (dump everything, recommended way)
 Database dump for plesk
 - mysqldump -uadmin -p`cat /etc/psa/.psa.shadow` psa > psa_bak.sql
+MySQL dump of every database individually
+- mysql -N -e 'show databases' | while read dbname; do mysqldump --complete-insert --routines --triggers --single-transaction "$dbname" > "$dbname".sql; done 
+- mysql -N -e 'show databases' | while read dbname; do mysqldump --complete-insert --routines --triggers --single-transaction "$dbname" > "$dbname".sql; [[ $? -eq 0 ]] && gzip "$dbname".sql; done  (to gzip it on the fly)
 
 MySQL import
 - mysql -u username -p database_name < file.sql
+Import all DBs from individual DB dumps
+- for sql in *.sql; do dbname=${sql/\.sql/}; echo -n "Now importing $dbname ... "; mysql $dbname < $sql; echo " done."; done  (will import all DBs and overwrite existing DB!)
 
 Watching mysql processes
 - watch -n0.5 'mysql -uadmin -p`cat /etc/psa/.psa.shadow` -e "show full processlist;"' (plesk edition)
