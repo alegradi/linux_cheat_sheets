@@ -4,6 +4,8 @@ Password for logging in
 plesk login  (to generate login link, only works in version 17+)
 /usr/local/psa/bin/admin --show-password  (older versions)
  
-
+PCI compliance resolver
+plesk sbin pci_compliance_resolver --enable all  (to enable for all services)
+plesk sbin pci_compliance_resolver --enable dovecot  (to specify a service)
 
 
