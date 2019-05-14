@@ -1,9 +1,12 @@
 MYSQL commands
 
-After the installation is done
+Connecting to MySQL
 - mysql -u "username" -p  (to log in as that user, and prompt for the password or)
 - mysql -uadmin -p`cat /etc/psa/.psa.shadow`  (to log in to plesk protected db)
 - plesk db  (for not protected mysql instance on plesk panel server)
+Remote connection
+- mysql -uroot -p -h localhost  (If connection is only allowed from localhost)
+- mysql -uroot -p -h 192.168.2.12  (to connect to a remote host)
 
 In mysql end every command with ";". Also in most documentation, the commands are written all capital, however this is not a must.
 
