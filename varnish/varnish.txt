@@ -1,0 +1,32 @@
+Basic Varnish command line tools
+
+Default configuration
+/etc/varnish/default.vcl
+
+Backend and Varnish status on a graph
+varnishhist  
+
+Varnish statistics real time
+varnishstat
+varnishstat -1  (to see current counter stats, verbose)
+
+Filtered information about the traffic between the backend and Varnish
+(tx - request to backend)
+(rx - requests from clients to Varnish)
+varnishtop
+
+varnishtop -i txurl  (tx is request to the backend, what are the most common request to the backend)
+varnishtop -i RxHeader -C -I ^User-Agent  (to see what user agents are the most common from clients)
+varnishtop -i TxHeader -C -I ^User-Agent  (use this to compare the results to the previous one to see what clients are causing misses)
+varnishtop -i RxHeader -I Cookie  (see what cookie values are most commonly sent to Varnish)
+varnishtop -i RxHeader -I '^Host:'  (to see what hosts are being accessed through Varnish)
+varnishtop -i RxHeader -I '^Accept-Charset'  (to see what accept-charsets are used by the client)
+
+Analyzing Varnish traffic
+varnishlog
+
+varnishlog -b -m "RxStatus:500"  (to list requests resulting in 500 and their details)
+
+Generate varnish logs for later analyzing
+varnishncsa
+
