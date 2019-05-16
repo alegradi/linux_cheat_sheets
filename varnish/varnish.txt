@@ -3,6 +3,9 @@ Basic Varnish command line tools
 Default configuration
 /etc/varnish/default.vcl
 
+Config syntax test
+varnishd -C -f /etc/varnish/default.vcl
+
 Backend and Varnish status on a graph
 varnishhist  
 
