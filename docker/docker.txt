@@ -1,0 +1,98 @@
+Docker notes - still needs clearing up
+
+EXERCISE 1 - RUN A CONTAINER
+
+1,Open a terminal and install docker
+
+sudo dnf install docker
+sudo systemctl enable --now docker
+
+2,Verify the Centos image is availabe and pull it
+
+sudo docker search centos
+sudo docker pull centos
+
+3,Run the container with no interactive flags to test docker is working and can launch a container
+
+sudo docker run docker.io/centos
+sudo docker ps -a
+
+4,Run the container with an interactive shell
+
+sudo docker run -it docker.io/centos
+
+5, In the container install the web server and create a web page and start the webserver.
+
+yum -y install httpd
+echo "CDLP Container Website" > /var/www/html/index.html
+httpd -DFOREGROUND
+
+6,Open a new terminal window and find the ip of the container.
+
+sudo docker ps
+sudo docker inspect <container_name>
+
+7,Check you can reach the web server in the container.
+
+curl http://<container_ip>/
+
+8,Back in the original terminal window, stop the webserver and exit the container, then create a new image based on the container with a tag.
+
+sudo docker commit <container_name> cdlp_webserver:v1.0
+
+9,Tag the image as ‘latest’ and verify.
+
+sudo docker tag cdlp_webserver:v1.0 cdlp_webserver:latest
+sudo docker images
+
+10,Run a new detached container with the newly created image.
+
+sudo docker run -d cdlp_webserver httpd -DFOREGROUND
+
+11,Check the ip of the new container and test trying to access the website
+
+sudo docker ps
+sudo docker inspect <container_name>
+curl http://<container_ip>/
+
+EXERCISE 2 - NETWORKING AND VOLUMES
+
+1,Get the precreated git server image lerenn/git-server
+
+sudo docker pull lerenn/git-server
+
+2,Create ssh keys with defaults.
+
+ssh-keygen
+
+3,Create a docker volume
+
+sudo docker volume create gitvol
+
+4,Prepare the volume with the keys
+
+sudo mkdir /var/lib/docker/volumes/gitvol/_data/.ssh/
+sudo cp ~/.ssh/id_rsa.pub /var/lib/docker/volumes/gitvol/_data/.ssh/authorized_keys
+
+5,Run the Container.
+
+sudo docker run -d -v gitvol:/var/git -p 2222:22 lerenn/git-server
+
+6,Create a repo in the volume using the container script
+
+ssh git@localhost -p 2222 create-repository mywork
+
+7,Clone the repository.
+
+git clone ssh://git@localhost:2222/~/mywork.git ~/mywork
+
+8,Add a file to the repository and push it back to the repo
+
+cd ~/mywork
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+cp /etc/fstab .
+git add fstab
+git commit fstab -m "new file"
+git push
+
