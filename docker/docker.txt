@@ -1,5 +1,8 @@
 Docker notes - still needs clearing up
 
+Default log location on Centos
+/var/log/messages
+
 EXERCISE 1 - RUN A CONTAINER
 
 1,Open a terminal and install docker
