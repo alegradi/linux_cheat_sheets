@@ -5,9 +5,6 @@ sar
 -d  report on each block device
 -P ALL  report on all cpus
 -s hh:mm:ss  set starting time 
-iptables -L -n
-ls -ltr
-atop -afp 1
 
 ssl testing
 ~]$ nmap -sV --script ssl-enum-ciphers -p 443 "ip"
@@ -23,5 +20,3 @@ kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')  (works perfectl
 grep -e "shutdown" /home/*/.bash_history
 grep -e "reboot" /home/*/.bash_history
 
-
-dd
