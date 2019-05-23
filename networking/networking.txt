@@ -79,7 +79,10 @@ to see what is listening on what port
 	- netstat -peanut
 
 netcat 
-to generate traffic
+yum install nc  (on Centos)
+nc -l 57001  (to listen on port 57001)
+	Try to telnet from an external source to the port like telnet <server_IP> 57001
+	Anything typed on the remote machine should be visible on the local machine
 	 	
 route
 route -n  (to display the routing table)
