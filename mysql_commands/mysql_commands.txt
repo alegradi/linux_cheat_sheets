@@ -70,3 +70,8 @@ Saving the root password in a file for easier access:
 	user=root
 	password="pass"
  
+=== MySQL log operation ===
+
+Always flush the logs after doing some operation on them
+mysqladmin flush-logs 
+
