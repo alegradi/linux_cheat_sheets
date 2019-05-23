@@ -36,4 +36,5 @@ pcs property set stonith-enabled=false  (to Disable fencing (one node))
 systemctl enable corosync.service; systemctl enable corosync.service  (to Start and enable corosync)
 pcs cluster start --all  (to Start all cluster services)
 
-
+pcs resource group add group-name resource-id [--before  resource-id  | --after  resource-id ]  (to move the order of resources)
+pcs resource group add web ip --before vg  (for example)
