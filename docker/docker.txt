@@ -3,6 +3,15 @@ Docker notes - still needs clearing up
 Default log location on Centos
 /var/log/messages
 
+-= Basics =-
+docker ps -a  (to show docker process list and history)
+docker search <container_name>  (for example docker search centos)
+docker pull <container_name>  (to download the container)
+docker image ls  (to show currently downloaded images)
+docker run docker.io/<container_name>  (to run a container downloaded from dockerhub)
+docker run -it <container_name>  (to run it with an interactive shell)
+
+
 EXERCISE 1 - RUN A CONTAINER
 
 1,Open a terminal and install docker
