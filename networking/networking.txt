@@ -63,6 +63,9 @@ tcpdump
 	- tcpdump -i 1 -w "filename".pcap (traditionally) -v (to see if it works)
 	- tcpdump -r "filename"  to read a capture file
 
+	Advanced
+	- tcpdump -i eth0 tcp port 2020 and dst host "remoteip"  (to check connections coming in on tcp port 2020 from remoteip) 
+
 traceroute 
 to trace connections accross the network
 	- traceroute "hostname"
