@@ -33,6 +33,8 @@ rpm -qa --queryformat '(%{installtime:date}) %{name}\n' packagename
 
 yum --showduplicates list "package" | expand  (to see different versions of the same package)
 
+yum whatprovides */filename  (to find out what package provides that file)
+
 rpm
 
 rpm -qpR "package"  (to see dependencies of a package)
