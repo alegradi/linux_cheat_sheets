@@ -3,3 +3,7 @@ cPanel related command line tools
 Show password to be able to log in
 whmapi1 create_user_session user=root service=whostmgrd
 
+Scripts
+/scripts/updatenow  (to update all cPanel scripts)
+/scripts/upcp  (update WHM/cPanel)
+/scripts/upcp --force  (this will reinstall WHM/cPanel if you are already up to date)
