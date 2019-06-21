@@ -19,3 +19,6 @@ Common log locations
 Running the updated with all versions offered (ideal for incremental upgrade!)
 ./usr/local/psa/admin/bin/autoinstaller --all-versions
 
+Check emails and their passwords set up
+/usr/local/psa/admin/sbin/mail_auth_view
+
