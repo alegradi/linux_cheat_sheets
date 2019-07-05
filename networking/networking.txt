@@ -109,3 +109,7 @@ dstat 5 10  (for 5 second intervals and 10 iterations)
 
 hostname
 hostnamectl set-hostname "hostname"  (to change the hostname, does not require restart)
+
+dig
+dig -x 192.168.0.1 +short  (to do rdns lookup)
+dig 192.168.0.1 A +short  (A record lookup) 
