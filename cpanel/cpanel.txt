@@ -10,5 +10,5 @@ Scripts
 /scripts/updatenow  (to update all cPanel scripts)
 /scripts/upcp  (update WHM/cPanel)
 /scripts/upcp --force  (this will reinstall WHM/cPanel if you are already up to date)
-
+/usr/local/cpanel/cpkeyclt  (to update license manually)
 
