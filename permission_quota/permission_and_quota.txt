@@ -56,6 +56,12 @@ setfacl -m d:g:sales:rx accounts
 	- sets default ACL
 setfacl -b  (to restore default (user, group, owner))
 
+Use getfacl to back up current file ownerships and permissions before a change
+getfacl -Rp /var/www/vhosts > /root/vhosts_permissions.acl
+
+Restore file ownership and permissions from .acl file
+setfacl --restore=vhosts_permissions.acl
+
 Attributes - Applies to files only
 Needs fs support, if not available, needs to use  user_xattr  as option on mount
 
