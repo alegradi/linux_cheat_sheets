@@ -1,13 +1,9 @@
 [root@mail8 ~]# cat /var/www/vhosts/*/logs/access_*log | awk '{print $1}' | sort -n | uniq -c | sort -nr | head -20
 
 exim -bpc
-sar
--d  report on each block device
--P ALL  report on all cpus
--s hh:mm:ss  set starting time 
 
 ssl testing
-~]$ nmap -sV --script ssl-enum-ciphers -p 443 "ip"
+nmap -sV --script ssl-enum-ciphers -p 443 "ip"
 
 bacula 
 restarting service for all the clients
