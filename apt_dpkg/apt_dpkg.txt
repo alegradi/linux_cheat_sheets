@@ -39,5 +39,5 @@ ldd /bin/bash  (for example)
 
 List available updates but do not install them
 apt list --upgradable  (this works on modern apt versions)
-apt-get -u upgrade --asume-no  (this should work on all versions)
+apt-get -u upgrade --assume-no  (this should work on all versions)
 
