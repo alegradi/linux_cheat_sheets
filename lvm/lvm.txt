@@ -9,6 +9,9 @@ Hierarchy
 	–	HDD
 Always start from the bottom and work your way up ( at resizing the same applies)
 
+Fdisk to create a new partition or if this is a VM and existing disk was extended you can use
+growpart /dev/sdx <disk number>  (to grow a disk)
+
 Physical Volume
 - pvcreate /dev/"disk"  (to create a physical volume)
 - pvremove /dev/”disk”  (to remove a physical volume from the pool)
