@@ -1,0 +1,9 @@
+OpenSSL 
+
+Verify the expiry date of an SSL from the server directly
+cat /path/to/certificate.crt | openssl x509 -noout -enddate
+
+Verify tls in use on remote server
+openssl s_client -connect example.com:443 -tls1
+openssl s_client -connect ip.of.the.server:443 -tls1_1
+openssl s_client -connect ip.of.the.server:443 -tls1_2
