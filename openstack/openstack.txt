@@ -1,0 +1,13 @@
+OpenStack 
+
+Basics
+
+openstack server create --help
+openstack image list  (to see all available images)
+openstack flavor list  (to see all instance options that can be launched)
+openstack network list  (to see all available networks)
+
+
+
+
+
