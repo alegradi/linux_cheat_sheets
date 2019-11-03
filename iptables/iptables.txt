@@ -29,6 +29,7 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 Advanced uses
 iptables -A INPUT --protocol icmp --in-interface enp0s3 -j DROP  (to drop all icmp requests coming in on enp0s3)
+iptables -I INPUT -p tcp --dport 40000:40100 -j ACCEPT  (to allow in for a port range)
 iptabels -I INPUT -s 192.168.0.12 -j DROP -m comment --comment "Blocking .12"  (to block source IP with comments, inserting the rule)
 
 Removing rules
