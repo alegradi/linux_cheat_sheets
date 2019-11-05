@@ -12,3 +12,7 @@ Scripts
 /scripts/upcp --force  (this will reinstall WHM/cPanel if you are already up to date)
 /usr/local/cpanel/cpkeyclt  (to update license manually)
 
+Exim
+exim -bp | exiqgrep -i | xargs exim –Mrm  (to clear mail queues)
+exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash  (to clear excessive mail queues)
+
