@@ -6,6 +6,6 @@ Config files
 /etc/httpd/conf/httpd.conf  (main config file)
 	IncludeOptional vhost.d/*.conf  (to have a vhost config file, and folder)
 
-Apache Bench for performance checking
+Apache Bench for performance checking (comes with base Apache)
 ab -n 200 https://example.com  (to check curl response of a site 200 times)
 ab -n 100 -c 10 https://example.com  (to check 10 concurrent connections 100 times)
