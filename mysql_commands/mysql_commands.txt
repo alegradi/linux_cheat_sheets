@@ -49,6 +49,7 @@ Import all DBs from individual DB dumps
 Watching mysql processes
 - watch -n0.5 'mysql -uadmin -p`cat /etc/psa/.psa.shadow` -e "show full processlist;"' (plesk edition)
 - watch -n0.5 'mysql -e "show full processlist;"' (generic)
+- watch -n1 "mysqladmin proc status"
 
 mysqltuner
 - wget -O mysqltuner.pl mysqltuner.pl
