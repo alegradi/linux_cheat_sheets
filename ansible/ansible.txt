@@ -1,0 +1,3 @@
+Ansible commands
+
+ansible-doc -s "module_name"   (to see man-page-like info of module)
