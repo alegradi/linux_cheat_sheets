@@ -1,3 +1,19 @@
 Ansible commands
 
+Basic configuration
+/etc/ansible/hosts  (contains the hosts information)
+
 ansible-doc -s "module_name"   (to see man-page-like info of module)
+
+ad-hoc commands
+ansible <host> -m ping  (to ping a host)
+ansible <host> -b  (to gain root privileges, if ran as not root)
+ansible <host> -m setup  (to pull in the Ansible facts)
+ansible <host> -m setup --key-file=/location/to/key/file  (to specify ssh key file)
+ansible <host> --key-file= -m yum -a --key-file=/location/to/key/file "name=package_name state=latest"  (to install the latest version of a packege)
+ansible <host> -m service -a "name=httpd state=started"
+
+Ansible playbook commands
+ansible-playbook -i <inventory_file> <playbook_name>  (basic way of running a playbook)
+ansible-playbook -i <inventory_file> <playbook_name> --check  (to do dry-run)
+
