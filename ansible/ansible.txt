@@ -13,6 +13,7 @@ ansible <host> -m setup --key-file=/location/to/key/file  (to specify ssh key fi
 ansible <host> --key-file= -m yum -a --key-file=/location/to/key/file "name=package_name state=latest"  (to install the latest version of a packege)
 ansible <host> -m service -a "name=httpd state=started" (to get a service started)
 ansible <host> -e "target_hosts=localhost"  (to pass in a variable)
+ansible <host> -m yum -a "name=package" state=absent"  (to remove a package with yum)
 
 Ansible playbook commands
 ansible-playbook -i <inventory_file> <playbook_name>  (basic way of running a playbook)
