@@ -14,6 +14,7 @@ ansible <host> --key-file= -m yum -a --key-file=/location/to/key/file "name=pack
 ansible <host> -m service -a "name=httpd state=started" (to get a service started)
 ansible <host> -e "target_hosts=localhost"  (to pass in a variable)
 ansible <host> -m yum -a "name=package" state=absent"  (to remove a package with yum)
+ansible -i inventory.file <host> --key-file=/location/to/key/file -b -a "/sbin/shutdown -r now"  (to use an inventory file for host info and issue a reboot)
 
 Ansible playbook commands
 ansible-playbook -i <inventory_file> <playbook_name>  (basic way of running a playbook)
