@@ -3,6 +3,9 @@ cPanel related command line tools
 Show password to be able to log in
 whmapi1 create_user_session user=root service=whostmgrd
 
+Disable 2FA
+whmapi1 twofactorauth_disable_policy
+
 Manual installation
 cd /home && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest
 
