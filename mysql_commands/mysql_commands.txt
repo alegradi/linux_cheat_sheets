@@ -76,3 +76,4 @@ Saving the root password in a file for easier access:
 Always flush the logs after doing some operation on them
 mysqladmin flush-logs 
 
+mysqlbinlog --start-datetime="2019-11-07 01:08:00" bin.log* --stop-datetime="2019-11-17 01:00:00" >> /restore_/example.sql  (proper way of replaying MySQL binary logs into another sql file)
