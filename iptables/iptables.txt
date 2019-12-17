@@ -13,6 +13,7 @@ iptables -P FORWARD/INPUT/OUTPUT DROP/REJECT/ACCEPT  (to set defaults)
 
 iptables-save > "file"
 iptables-restore < "file"
+service iptables save  (to save the iptables rules)
 
 Loopback
 iptables -A INPUT -i lo -j ACCEPT
