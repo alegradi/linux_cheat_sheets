@@ -5,13 +5,8 @@ exim -bpc
 ssl testing
 nmap -sV --script ssl-enum-ciphers -p 443 "ip"
 
-bacula 
-restarting service for all the clients
-for i in sd fd dir; do service bacula-$i restart; done
-
 killing a zombie process
 kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')  (works perfectly)
-
 
 grep -e "shutdown" /home/*/.bash_history
 grep -e "reboot" /home/*/.bash_history
