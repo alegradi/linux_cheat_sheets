@@ -1,0 +1,3 @@
+Bacula command line tools
+
+for i in sd fd dir; do service bacula-$i restart; done  (to restart service for all processes)
