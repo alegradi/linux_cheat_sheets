@@ -34,3 +34,12 @@ git log -S function_name  (to look for string, and commits that changed the numb
 
 git clone https://github.com/libgit2/libgit2  (to clone an existing Repository)
 git clone https://github.com/libgit2/libgit2 mylibgit  (defining a new target dir for the git clone)
+
+Branching
+git branch testing  (to create a new branch called testing)
+git branch  (to verify available branches and which one is active)
+git checkout testing  (to switch to the testing branch)
+git checkout -b feature/new-feature  (to switch to and create if doesn't exist)
+
+Merging
+git merge <name_of_branch>  (to merge <name_of_branch> to the active branch)
