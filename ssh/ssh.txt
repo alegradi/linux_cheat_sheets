@@ -92,5 +92,7 @@ sshd_config  file look for the sftp line, If uncommented, it should work
 - get  to pull files/folders
 - put  to push files/folders
 
-Using a .ssh/config  file can make your life much much easier
-
+Allow access with password for one user while key-based authentication is the defaul
+/etc/ssh/sshd_config
+Match User tempuser
+	PasswordAuthentication yes
