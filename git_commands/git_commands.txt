@@ -41,5 +41,8 @@ git branch  (to verify available branches and which one is active)
 git checkout testing  (to switch to the testing branch)
 git checkout -b feature/new-feature  (to switch to and create if doesn't exist)
 
+git branch -a  (to show all available branches)
+git checkout --track <remote_name>/<branch_name>  (to change to remote branch and track it)
+
 Merging
 git merge <name_of_branch>  (to merge <name_of_branch> to the active branch)
