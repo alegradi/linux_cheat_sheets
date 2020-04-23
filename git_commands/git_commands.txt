@@ -2,6 +2,8 @@ git
 
 git config
 git config --list  (to see git config settings)
+git config --global user.name "<username>"
+git config --global user.email <user email>
 
 
 git init  (in the folder, to start git)
