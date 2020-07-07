@@ -1,4 +1,4 @@
-Software RAID - setup instructions
+Software RAID - basic setup instructions
 
 1, First you need at least 2 devices/partitions prepared. The type should be set to  Linux Raid 
 	- Might need  partprobe when finished
