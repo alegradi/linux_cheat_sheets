@@ -13,6 +13,7 @@ docker images == docker image list
 docker image ls  (to show currently downloaded images)
 docker rmi "id_or_name"  (to remove a docker image, there cannot be any containers running based on that image)
 docker images -a  (to show all images)  
+docker images --filter "dangling=true"  (to show only dangling images)  
 docker image prune  (to remove dangling images)  
 
 ## Container management
