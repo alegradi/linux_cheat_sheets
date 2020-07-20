@@ -12,6 +12,8 @@ docker run -it "container_name"  (to run it with an interactive shell)
 docker images == docker image list  
 docker image ls  (to show currently downloaded images)
 docker rmi "id_or_name"  (to remove a docker image, there cannot be any containers running based on that image)
+docker images -a  (to show all images)  
+docker image prune  (to remove dangling images)  
 
 ## Container management
 docker stop "id_or_name"  (to stop an instance)  
@@ -25,6 +27,7 @@ docker run -d "image"  (to start docker container in detached mode)
 docker attach "id"  (to reattach a container to the terminal)  
 docker run -i "image"  (interactive mode, the instance accepts from standard input)  
 docker run -it "image"  (interactive mode with terminal attached)  
+docker run -it --rm "image"  (to run container with removing once stopped, wont show with docker ps -a)
 docker run -p 80:5000 "image"  (Port mapping, map port 80 of the host to port 5000 of the container)  
 docker run -v /opt/datadir:/var/lib/mysql mysql  (to mount the mysql container's /var/lib/mysql on the host's /opt/datadir)
 docker logs "container_name"  (to see logs of a container if running in detached mode)  
