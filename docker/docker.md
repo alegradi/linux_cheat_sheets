@@ -1,7 +1,7 @@
 # Docker
 
 ## Basics
-docker ps  (to show all currently running containers)
+docker ps  (to show all currently running containers)  
 docker ps -a  (to show docker process list and history)  
 docker search "container_name"  (for example docker search centos)  
 docker pull "container_name"  (to download the container)  
