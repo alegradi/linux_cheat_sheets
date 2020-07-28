@@ -17,6 +17,8 @@ docker images --filter "dangling=true"  (to show only dangling images)
 docker image prune  (to remove dangling images)  
 
 ## Container management
+docker container ls -a  (to show all containers)
+docker container prune  (to delete dangling containers)
 docker stop "id_or_name"  (to stop an instance)  
 docker rm "id_or_name"  (to remove that docker container)  
 docker inspect "container_name"  (to verify the environment variables set on that docker container)  
