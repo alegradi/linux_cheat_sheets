@@ -50,3 +50,52 @@ spec:
     value: "blue"
     effect: "NoSchedule"
 ```
+
+## Affinity
+Example:  
+```
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoreDuringExecution:  (or preferredDuringSchedulingIgnoreDuringExecution)
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size  (example)
+            operator: In  (or NotIn, or Exists, in which case you don't specify values)
+            values:
+            - Large  (example)
+```
+
+## Resource requirement and limits
+Example of resource requirement in pod-definition for each container
+```
+spec:
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: 1
+```  
+
+cpu unit 1 = 1 vCPU
+
+first header   | second header
+---------------|---------------
+1 G (Gigabyte) | 1,000,000,000 bytes
+1 M (Megabyte) | 1,000,000 bytes
+1 K (Kilobyte) | 1,000 bytes
+1 Gi (Gibibyte)| 1,073,741,824 bytes
+1 Mi (Mebibyte)| 1,048,576 bytes
+1 Ki (Kibibyte)| 1,024 bytes
+
+Setting limits example:
+```
+spec:
+  resources:
+    limits:
+      memory: "2Gi"
+      cpu: 2
+```  
+
+
+
+
