@@ -14,11 +14,16 @@ kubectl get pods  (to see active pods)
 kubectl get pods -o wide  (to get more info)  
 kubectl get pod "podname" -o yaml > file.yml  (to create a pod definition yaml out of an existing pod)   
 kubectl run "name" --image="image_name"  (to create a pod)  
+kubectl run "name" --image="image_name" --dry-run -o yaml --command -- sleep 100 >  (to create a pod with a command passed in, order matters!)  
 kubectl -n kube-system get pods  (to see kubernetes's own pods, these are the system components)  
 kubectl get pods --namespace=kube-system  (same as above)  
 kubectl create -f "pod_definition.yml"  (to create a pod from definition)  
 kubectl apply -f "filename"  (to apply changes)
 ... --dry-run=client  (to verify if config is correct)
+
+## Logs and events
+kubectl get events  (to watch events)  
+kubectl logs "podname" --name-space="ns"  (to watch logs of a pod)  
 
 ### Replicasets
 kubectl get replicaset  (to get replicasets)  
