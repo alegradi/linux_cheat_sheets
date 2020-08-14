@@ -8,6 +8,8 @@ docker pull "container_name"  (to download the container)
 docker run docker.io/"container_name"  (to run a container downloaded from dockerhub)  
 docker run -it "container_name"  (to run it with an interactive shell)  
 
+docker log -f "id"  (to follow the logs of a docker container)  
+
 ## Image management
 docker images == docker image list  
 docker image ls  (to show currently downloaded images)
