@@ -16,5 +16,5 @@ If you want to specify an entrypoint it should be like this:
 spec:
   containers:
     command: ["python3.6"]  (overwrites ENTRYPOINT)
-    args: ["pip list"]  (for example, overwrites CMD)
+    args: ["pip", "list"]  (for example, overwrites CMD)
 ```
