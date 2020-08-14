@@ -18,3 +18,24 @@ spec:
     command: ["python3.6"]  (overwrites ENTRYPOINT)
     args: ["pip", "list"]  (for example, overwrites CMD)
 ```
+
+## Environment variables
+Pod definition should be:
+```
+spec:
+  containers:
+    env:
+      - name: APP_COLOR
+        value: pin
+```
+This is the same as `docker run -e APP_COLOR=pink "container_name"`  
+It can also be:
+```
+spec:
+  containers:
+    env:
+      - name: APP_COLOR
+        valueFrom:
+          configMapKeyRef:  or
+          secretKeyRef:
+``` 
