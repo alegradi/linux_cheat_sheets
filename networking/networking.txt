@@ -99,6 +99,7 @@ ss -4 state established
 
 nmap
 nmap to look for open ports, be careful to use it only on owned network/server
+nmap "ip"  (basic scan)  
 nmap -A localhost  (for a localhost scan)
 nmap -A -sS localhost  this doesn't finish the 3 way handshake, in theory it doesn't show up in logs
 
