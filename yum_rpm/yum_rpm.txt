@@ -52,3 +52,6 @@ rpm -Va  (to verify installed packages)
 
 rpm -qa gpg-pubkey*  (to show gpgs)
 rpm --rebuilddb  (to rebuild the rpm database)
+
+ls /etc/pki/rpm-gpg  (to see all official GPG keys)
+rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n'  (to see all imported GPG keys)
