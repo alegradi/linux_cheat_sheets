@@ -39,3 +39,41 @@ spec:
           configMapKeyRef:  or
           secretKeyRef:
 ``` 
+
+## Configmap
+kubectl get configmaps  (to see configmaps)
+
+### Imperative way
+kubectl create configmap  (imperative way)  
+
+kubectl create configmap "config_name" --from-literal="key"="value"  
+kubectl create configmap app-config --from-literal=APP_COLOR=blue  (for example, for further values use --from-literal option again in the same command)  
+kubectl create configmap  "config_name" --from-file="path/to/file"  (to use a file to create a configmap)  
+
+### Declarative way
+kubectl create -f  (declarative way)  
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: blue
+  APP_MODE: prod
+```
+kubectl create -f config-map.yaml
+
+Example configmap for mysql
+```
+port: 3306
+max_allowed_packet: 128M
+```
+
+To use configmap in a pod definition use:
+```
+spec:
+  containers:
+    envFrom:
+      - configMapRef:
+          name: app-config  (name a of the configmap)
+```
