@@ -18,8 +18,10 @@ kubectl run "name" --image="image_name" --dry-run -o yaml --command -- sleep 100
 kubectl -n kube-system get pods  (to see kubernetes's own pods, these are the system components)  
 kubectl get pods --namespace=kube-system  (same as above)  
 kubectl create -f "pod_definition.yml"  (to create a pod from definition)  
-kubectl apply -f "filename"  (to apply changes)
+kubectl apply -f "filename"  (to apply changes, preferred way of bringing in changes)
 ... --dry-run=client  (to verify if config is correct)
+kubectl replace -f "definition.file"  (this is perfect when making changes to a definition file)
+kubectl replace --force -f "definition_file"  (this will delete the resource and re-create it)
 
 ## Logs and events
 kubectl get events  (to watch events)  
