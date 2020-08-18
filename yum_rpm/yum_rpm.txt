@@ -45,6 +45,7 @@ rpm -q "package"  (to see if package is installed)
 rpm -ql "package"  (to show all the files installed in a package)
 rpm -qa  (to show all installed packages)
 rpm -qa --last  (latest packages installed, at the top of list)
+rpm -qc "package"  (to show configuration files relevant to package)  
 
 rpm -evv  (debug info on packages to be erased?)
 rpm -qdf /usr/bin/vmstat  (what files to look into for documentation)
