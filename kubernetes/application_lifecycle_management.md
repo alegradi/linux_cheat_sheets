@@ -73,7 +73,29 @@ To use configmap in a pod definition use:
 ```
 spec:
   containers:
+  - envFrom:
+    - configMapRef:
+        name: "name_of_configmap"
+```
+The best way to get this information is with:
+`kubectl explain pods --recursive | grep envFrom -A3`
+
+## Secrets
+kubectl get secrets  (to get secrets)
+
+kubectl create secret generic  (imperative way)  
+kubectl create secret generic "secret_name" --from-literal="key"="value" --from-literal=...  
+
+kubectl create -f secret_def.file  (declarative way)
+echo -n "password" | base64  (to base64 encode data)
+echo -n "432dlfdD" | base64  --decode  (to decode encoded data)
+
+Defintion file for secrets should look like this:
+```
+spec:
+  containers:
+  - image: ...
     envFrom:
-      - configMapRef:
-          name: app-config  (name a of the configmap)
+    - secretRef:
+        name: "secret_name"
 ```
