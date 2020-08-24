@@ -24,6 +24,7 @@ apt-get remove --purge “package”  (to remove it with its dependencies & conf
 apt-get upgrade or use dist-upgrade (which is better on dependencies)
 apt-get changelog “package”  (to see the changelog of that package)
 apt-get download “package”  (to download a package only)
+apt-get --only-upgrade install "package"  (to upgrade a single package)
 
 apt-file 
 apt-file find “package”
