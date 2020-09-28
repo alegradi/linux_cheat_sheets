@@ -76,3 +76,52 @@ kubectl config -h  (to see list of options)
 kubectl config view  
 kubectl config view --kubeconfig=my-custom-config  (to specify custom config to use)  
 kubectl config use-context prod-user@production  (to change the context on the fly)  
+
+## API access
+
+kubectl proxy  (to start a proxy with the certificates used, no need to specify them in curl)
+  curl http://localhost:8001 -k  (to see API options and connect to the proxy)
+
+## RBAC
+
+kubectl get roles  (to see active roles)  
+kubectl get rolebindings  (to see active role bindings)  
+kubectl auth can-i create deployment  (to see if you have permission to do something)  
+kubectl auth can-i delete nodes  
+kubectl auth can-i delete nodes --as user  (to check if a certain user has access to something, you need to be admin for this)  
+
+developer-role.yml
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list", "get", "create", "update", "delete"]  (what they are allowed to do)
+
+- apiGroups: [""]
+  resources: ["ConfigMap"]
+  verbs: ["create"]
+```
+
+kubectl create -f developer-role.yml
+
+devuser-developer-binding.yml
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devuser-developer-binding
+subjects:
+- kind: User
+  name: dev-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+```
+
+kubectl create -f devuser-developer-binding.yml
