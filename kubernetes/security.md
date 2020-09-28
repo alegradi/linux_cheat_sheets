@@ -49,3 +49,30 @@ kubectl create serviceaccount
 
 ## SSL verification
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout  (to view details of the certificate)
+openssl req -in /path/to.csr -text -noout -verify  (to verify a csr)
+
+## Certificate signing
+kubectl get csr  (to show pending certificate signing requests)  
+kubectl certificate approve "name"  (to approve a signing request)
+
+```
+apiVersion: certificates.k8s.io/v1beta1
+kind: certificateSigningRequest
+metadata:
+  name: name
+spec:
+  groups:
+  - system:authenticated
+  request: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQXBjUWo5M2JKcnZsdStYTXkrNlAyRndoakV0OEVkVXlBek5kRndLSUpYc3Z4CnNDUjIrS2FqTlNvY2dLTFozaDNYemFmOGM5cEJpZU1TWnBXSlZCbGxOdS9oeEF1aWtORU1SeGdjNWJXUGFOc0IKbEZoNUF1TmVrdjVGNkN6eDhaT0ZXRlpXdXcwS3JEbGd2K09hcldCU0p0U0ZtcWdEUlZVVXdMSGlHTHpFb2NRWApFUWxpUGVRSE5LeE5QZWZ4R1FSVzIwZkVoN1VoUVQvVkpyTHZ3Qk8ySHR2b01BNWhwK1U1VzZ2bzlobkMxYXpSClF3STV0SERQcVd6R0JZT1FjcTFIcDk5RExYNHpsaXhmMGNLdUtLOEkwRGoyUDhHM1d6K3FKQ1Y5V0J6NE8wRGUKbGRIMld2NVBtTURVQ0N5VEM0ODFCd3BaNHNVcUFlV09QZG41WkVUemZ3SURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBSC9WZmRLWGVaT0JxWEdBajZJemJtZ3VhaThwZGhCcTJsUEZRcWQyem5BWjVJaFVqekdIClRSbTM2YmtOTm1TSjUzRi82cGVIaHV4SXN4VUJORWRXNHBaOXQwbkVtQXRBYVdRbFI3OG1IV0I0c0RJNEV6dVAKMUV4V1pmWVJwWk9XQ2dzZFI4aGpaWngxQ3p1UUtjSnVnZjRRSzIwQXpFSERFNUdBVFFvejlKWXVrZ0hPb29NNQpuT1NVL2NvbE52MklONm8xZnU2cTJXOXFWTzUvMi8wYVlyOTlPbHVLTmFRU1QxY0dJL0owbDV1RG9pZ0pxdHZ5Ck9oeG45enZLbzluYzVmVkFhaFFZK08vMWZFaDE5Z1JSaTVpL0FxSnV1T2c0L0dRVFd3bVN5VmpvOTFoV1dSNSsKbWV4bXNBcmw3NGhPck1VM3pBTUcwMks3d2lIamRjNms4UVE9Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=  (csr base64 encoded)
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+```
+
+## Kube config
+
+kubectl config -h  (to see list of options)  
+kubectl config view  
+kubectl config view --kubeconfig=my-custom-config  (to specify custom config to use)  
+kubectl config use-context prod-user@production  (to change the context on the fly)  
