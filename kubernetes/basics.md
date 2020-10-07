@@ -12,6 +12,7 @@ kubectl run --generator=run-pod/v1 nginx --image=nginx --dry-run -o yaml  (this 
 kubectl get nodes  (to see nodes in the cluster)  
 kubectl get pods  (to see active pods) 
 kubectl get pods -o wide  (to get more info)  
+kubectl get pods --show-labels  (to show labels of pods, useful for identification)  
 kubectl get pod "podname" -o yaml > file.yml  (to create a pod definition yaml out of an existing pod)   
 kubectl run "name" --image="image_name"  (to create a pod)  
 kubectl run "name" --image="image_name" --dry-run -o yaml --command -- sleep 100 >  (to create a pod with a command passed in, order matters!)  
