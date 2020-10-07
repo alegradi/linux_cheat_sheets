@@ -124,4 +124,57 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-kubectl create -f devuser-developer-binding.yml
+kubectl create -f devuser-developer-binding.yml  
+
+kubectl api-resources --namespaced=true/false  (to see list of resources either namespaced or not) 
+
+kubectl create clusterrole  (to create a cluster role, for non namespaced resources)  
+kubectl create clusterrolebinding  (to assign a user to a role, for non namespaced resources)  
+
+kubectl get clusterroles  (to view existing clusterroles)  
+
+## Authorization method
+
+kubectl describe pod kube-apiserver-master -n kube-system | grep -i auth  (to verify the authorization method in use)  
+kubectl describe role "rolename"  (to verify what resources it has access to)  
+
+## Image security
+
+kubectl create secret docker-registry regcred --docker-server=private-registry.io --docker-username=username --docker-password=password --docker-email=user@address  
+
+use the below in the pod definition to use it:
+```
+imagePullSecrets:
+- name: regcred
+```
+
+## Security context
+In the definition file it's securityContext
+
+run a command on a container like this:
+kubectl exec -it ubuntu-sleeper -- date -s '19 APR 2012 11:14:00'
+
+## Network policy
+
+kubectl get netpol  (to get network policies)
+
+```
+...
+kind: NetworkPolicy
+metadata:
+  name:
+spec:
+  podSelector:
+    matchLables:
+      role: 
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name:
+    ports:
+    - protocol: TCP
+      port: 3306
+```
