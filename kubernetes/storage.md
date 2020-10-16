@@ -84,7 +84,6 @@ metadata:
   name: mypod
 spec:
   containers:
-  containers:
     ...
   volumes:
     - name: mypd
@@ -92,4 +91,36 @@ spec:
         claimName: myclaim
 ```
 
+### View logs in the container
+kubectl exec podname -- cat /var/log/log
 
+## Storage Class
+Dyanmically provision storage on cloud providers when the request is made  
+Dynamic provisioning definition for google:
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: google-storage
+provisioner: kubernetes.op/gce-pd
+```
+
+Reference the storageclass in a pvc like this:
+```
+metadata:
+  name: myclaim
+spec:
+  storageClassName: google-storage
+```
+
+Define in a pod:
+```
+...
+spec:
+  containers:
+  ...
+  volumes:
+  - name: data-volume
+    persistentVolumeClaim:
+      claimName: myclaim
+```
