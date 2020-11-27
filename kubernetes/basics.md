@@ -6,7 +6,7 @@ This is still work in progress and badly needs organising
 kubectl run --generator=run-pod/v1 nginx --image=nginx  (to create an nginx pod)
 kubectl run --generator=run-pod/v1 nginx --image=nginx --dry-run -o yaml  (this will print the basic yaml of the config)  
 
-
+kubectl cluster info  (to see basic cluster information)
 
 ## Basics
 kubectl get nodes  (to see nodes in the cluster)  
