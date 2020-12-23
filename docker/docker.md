@@ -1,6 +1,7 @@
 # Docker
 
 ## Basics
+docker info  (to see basic docker information)
 docker ps  (to show all currently running containers)  
 docker ps -a  (to show docker process list and history)  
 docker search "container_name"  (for example docker search centos)  
@@ -9,6 +10,12 @@ docker run docker.io/"container_name"  (to run a container downloaded from docke
 docker run -it "container_name"  (to run it with an interactive shell)  
 
 docker log -f "id"  (to follow the logs of a docker container)  
+
+## Advanced commands
+docker system info  (to see system information)
+docker system df  (to see what is taking up the disk space)
+docker images | grep -e days -e weeks -e months | awk '{print $3}' | sort | uniq | xargs docker rmi -f  (delete images that are older than 2 days)
+docker images | grep -e '^<none>' | grep -e days -e weeks -e months | awk '{print $3}' | sort | uniq | xargs docker rmi -f  (delete any local images that aren't tagged)
 
 ## Image management
 docker images == docker image list  
