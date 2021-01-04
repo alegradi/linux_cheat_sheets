@@ -1,7 +1,9 @@
 # Application Lifecycle Management
 
-kubectl rollout status deployment/myapp-deployment  (to check status of an upgrade)
-kubectl rollout undo deployment/myapp-deployment  (to undo an upgrade and roll back to previous state)
+## Application updates 
+
+kubectl rollout status deployment/myapp-deployment  (to check upgrade status of a deployment)  
+kubectl rollout undo deployment/myapp-deployment  (to undo an upgrade and roll back to previous state)  
 
 ## Commands and args
 Anything you would specify as an argument in `docker run` should go to:  
