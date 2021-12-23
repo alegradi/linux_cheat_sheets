@@ -2,13 +2,14 @@
 
 ## Basic usage
 ```bash
-$ atop -afp 1
+atop -afp 1
 ```
 
-## Loggin settings
+## Loging settings
 Verify logging frequency:
 ```bash
-$ systemctl status atop
+systemctl status atop
+
 ● atop.service - Atop advanced performance monitor
      Loaded: loaded (/lib/systemd/system/atop.service; enabled; vendor preset: enabled)
      Active: active (running) since Thu 2021-12-23 09:49:13 GMT; 2h 43min ago
@@ -23,7 +24,8 @@ This is set to `600` seconds as can be seen above.
 
 Verify config with going to the service file, from the info above:
 ```bash
-$ cat /lib/systemd/system/atop.service
+cat /lib/systemd/system/atop.service
+
 [Unit]
 Description=Atop advanced performance monitor
 Documentation=man:atop(1)
@@ -32,8 +34,10 @@ Documentation=man:atop(1)
 Type=simple
 ExecStart=/usr/share/atop/atop.daily
 ...
+```
+```bash
+head /usr/share/atop/atop.daily
 
-$ head /usr/share/atop/atop.daily
 #!/bin/bash
 # this is called - on sysvinit systems - at midnight by cron
 # on systemd systems this is called from the systemd unit
