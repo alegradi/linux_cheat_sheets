@@ -71,6 +71,3 @@ The rule is:
 ```bash
 iptables -t nat -A DOCKER -j DNAT --dport 8080 -to-destination 172.17.0.2:80
 ```
-
-## CNI - Container networking interface
-
