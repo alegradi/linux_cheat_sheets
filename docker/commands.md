@@ -1,9 +1,38 @@
 # Commands details
 
+Example:
+```
+FROM UBUNTU
+CMD sleep 5
+```
+
+`docker run ubuntu-sleep 10`  runs the sleep container and waits for 10 seconds.   
+
+---
+
+Example:
+```
+FROM UBUNTU
+ENTRYPOINT ["sleep"]
+```
+
+`docker run ubuntu-sleep 10` runs the sleep container and waits for 10 seconds.
+
+---
+
+Example:
+
+
+
+
+
+
+
 `CMD` - the command that runs in the container eg. `sleep` or `nginx`
 
-`docker run ubuntu sleep 5`  (runs the sleep program and waits for 5 seconds)  
-This should being done in the container would be:
+
+
+This being done in the container would be:
 ```
 CMD sleep 5
 ```
