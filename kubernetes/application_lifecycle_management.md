@@ -6,7 +6,7 @@ kubectl rollout status deployment/myapp-deployment  (to check upgrade status of 
 kubectl rollout undo deployment/myapp-deployment  (to undo an upgrade and roll back to previous state)  
 
 ## Commands and args
-Anything you would specify as an argument in `docker run` should go to:  
+Anything you would specify as an argument in `docker run` will go to:  
 ```
 spec:
   containers:
